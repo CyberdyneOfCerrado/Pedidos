@@ -1,0 +1,104 @@
+package pedidos.view;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import javax.servlet.http.HttpServletRequest;
+
+import pedidos.control.UserCaseController;
+import pedidos.util.ActionDone;
+import pedidos.util.DoAction;
+import biz.source_code.miniTemplator.MiniTemplator;
+import biz.source_code.miniTemplator.MiniTemplator.TemplateSyntaxException;
+
+//Cria o pacote geral de comunicação da aplicação 'DoAction' e gerencia as classes geradoreas de conteúdo.
+public class ServletController {
+	private String servletContext;
+	private UserCaseController ucc;
+	private Hashtable<String,ViewController> listViews;
+	String separador;
+	
+	public ServletController( String servletContext){
+        separador = System.getProperty("file.separator");
+		this.servletContext = servletContext+"templates"+separador;
+		this.ucc = new UserCaseController();
+		this.listViews = new Hashtable<>();
+		initViews();
+	};
+	
+	//Adicionar todas as classes de gerenciamento de conteúdo aqui.
+	private void initViews(){
+		//listViews.put("manterUsuario", new ManterUsuarioView(servletContext,"manterUsuario"));
+	};
+	
+	private String init() throws TemplateSyntaxException, IOException{
+		MiniTemplator index = null;
+		MiniTemplator temp = null;
+		index = new MiniTemplator(servletContext+"index.html");
+		temp = new MiniTemplator(servletContext+separador+"home"+separador+"login.html");
+		index.setVariable("conteudo",temp.generateOutput());
+		return index.generateOutput();
+	};	
+	
+	//Processa os dados da Servlet.
+	public String process(HttpServletRequest request) throws TemplateSyntaxException, IOException{
+		DoAction   da = makeDoAction(request);
+		ActionDone ad=null;
+		if(da.getAction()==null){
+			return init();
+		}else{
+		//Se ação ao informada for do tipo 'redirect' os dados não devem ser enviados
+			if( da.getHashtable().get("redirect").equals("false")){
+				ad = ucc.chooseUserCase(da);
+				ad.setData("redirect","false");
+			}else{
+				ad = new ActionDone(da.getUserCase(),da.getAction());
+				ad.setData("redirect","true");
+			}
+		}
+		return readActionDone(ad);
+	};
+	
+	//Cria um pacote DoAction
+	private DoAction makeDoAction(HttpServletRequest request){
+		//1 pegando o nome do caso de uso e a respectiva ação.
+		String userCase = request.getParameter("userCase");
+		String action   = request.getParameter("action");
+		
+		DoAction da = new DoAction(userCase,action);
+		
+		//Pegando todos os parâmetros adicionados, exceto pelo userCase e action;
+		Enumeration<String> valuesName = request.getParameterNames();
+		
+		while(valuesName.hasMoreElements()){
+			String temp = valuesName.nextElement();
+			if( !temp.equals("userCase") && !temp.equals("action")){
+				da.setData(temp,request.getParameter(temp));
+			}
+		}
+		return da;
+	};
+	
+	//Interpreta os dados do pacote ActionDone.
+	private String readActionDone(ActionDone ad){
+		//Condição trivial caso estes dois parâmetros sejam nulos. nulos vão para a tela de login.
+		String conteudo = null;
+		//gerando o conteúdo.
+		 ViewController view = listViews.get(ad.getUserCase());
+		
+		 conteudo  = view.choose(ad);
+		
+		//Fixando conteúdo na index.
+		MiniTemplator index = null;
+		try {
+			System.out.println(servletContext+"index.html");
+			index = new MiniTemplator(servletContext+"index.html");
+		} catch (TemplateSyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		index.setVariable("conteudo",conteudo);
+		return index.generateOutput();
+	};
+}
