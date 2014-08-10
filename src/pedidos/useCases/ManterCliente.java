@@ -19,7 +19,7 @@ public class ManterCliente extends ModelController {
 		ActionDone ad = cc.save(c.getColumnName(),c.getColumnName(),c.getColumnValues());
 		
 		ad.setAction(da.getAction());
-		ad.setUserCase(da.getUserCase());
+		ad.setUseCase(da.getUserCase());
 		ad.setStatus(true);
 		ad.setMessage("Você foi cadastrado com sucesso.");
 		return ad;

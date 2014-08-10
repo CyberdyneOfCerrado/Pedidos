@@ -6,17 +6,17 @@ public class ActionDone {
 	private boolean status;
 	private Hashtable<String,Object> data;
 	private String  message;
-	private String  userCase;
+	private String  useCase;
 	private String  action;
 	
 	public ActionDone(String userCase , String action){
 		this.data = new Hashtable<>();
-		this.userCase = userCase;
+		this.useCase = userCase;
 		this.action = action;
 	};
 	
 	public ActionDone(DoAction da){
-		this.userCase = da.getUserCase();
+		this.useCase = da.getUserCase();
 		this.action   = da.getAction();
 		this.data     = (Hashtable<String, Object>) da.getHashtable().clone(); 
 	};
@@ -49,11 +49,11 @@ public class ActionDone {
 		this.message = message;
 	};
 	
-	public String getUserCase() {
-		return userCase;
+	public String getUseCase() {
+		return useCase;
 	}
-	public void setUserCase(String userCase) {
-		this.userCase = userCase;
+	public void setUseCase(String userCase) {
+		this.useCase = userCase;
 	};
 	
 	public String getAction() {

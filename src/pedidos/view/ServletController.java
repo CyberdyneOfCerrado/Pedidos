@@ -34,7 +34,6 @@ public class ServletController {
 	
 	private String init() throws TemplateSyntaxException, IOException{
 		MiniTemplator index = null;
-		MiniTemplator temp = null;
 		index = new MiniTemplator(servletContext+"index.html");
 		index.setVariable("conteudo"," ");
 		return index.generateOutput();
@@ -62,17 +61,17 @@ public class ServletController {
 	//Cria um pacote DoAction
 	private DoAction makeDoAction(HttpServletRequest request){
 		//1 pegando o nome do caso de uso e a respectiva ação.
-		String userCase = request.getParameter("userCase");
+		String useCase = request.getParameter("useCase");
 		String action   = request.getParameter("action");
 		
-		DoAction da = new DoAction(userCase,action);
+		DoAction da = new DoAction(useCase,action);
 		
 		//Pegando todos os parâmetros adicionados, exceto pelo userCase e action;
 		Enumeration<String> valuesName = request.getParameterNames();
 		
 		while(valuesName.hasMoreElements()){
 			String temp = valuesName.nextElement();
-			if( !temp.equals("userCase") && !temp.equals("action")){
+			if( !temp.equals("useCase") && !temp.equals("action")){
 				da.setData(temp,request.getParameter(temp));
 			}
 		}
@@ -84,7 +83,7 @@ public class ServletController {
 		//Condição trivial caso estes dois parâmetros sejam nulos. nulos vão para a tela de login.
 		String conteudo = null;
 		//gerando o conteúdo.
-		 ViewController view = listViews.get(ad.getUserCase());
+		 ViewController view = listViews.get(ad.getUseCase());
 		
 		 conteudo  = view.choose(ad);
 		
