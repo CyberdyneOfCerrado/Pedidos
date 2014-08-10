@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Listar Todos os Cliente</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+  </head>
+  <body>
+
+     <!--Barra de navegação e botões-->
+     <nav class="navbar navbar-default navbar-fixed-top menu" role="navigation">
+      <div class="container-fluid">
+        <div class="row">   
+
+          <!-- Single button -->
+          <div class="col-md-1">
+         <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Cliente <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Incluir</a></li>
+          <li><a href="#">Consultar</a></li>
+          <li><a href="#">Listar Todos</a></li>
+          <li><a href="#">Consultar Cliente por Sexo</a></li>
+        </ul>
+      </div>
+      </div>
+
+      <!-- Single button -->
+          <div class="col-md-1">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+           Produto<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Incluir</a></li>
+          <li><a href="#">Consultar</a></li>
+        </ul>
+      </div>
+      </div>    
+
+          <!-- Single button -->
+          <div class="col-md-1">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Pedido <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Incluir</a></li>
+                <li><a href="#">Consultar</a></li>
+              </ul>
+            </div>
+          </div>
+
+            <!-- Single button -->
+            <div class="col-md-1 col-md-offset-8">
+            <button type="button" class="btn btn-default">Sair</button> 
+            </div>
+
+          </div>
+          </nav>
+          </div>
+    <!--Barra de navegação e botões * Fim-->
+
+    <!--Container principal -->
+    <div class="container">
+      <h1>Listar Todos os Clientes</h1>
+      <div class="row">
+        <div class="col-md-12">           
+        </div>
+      </div>
+
+ 
+
+    <!-- Tabela de resultados -->
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Resultados</div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <td>Nome</td>
+          <td>Idade</td>
+          <td>Sexo</td>
+          <td>
+            <button type="button" class="btn btn-primary" href="#">Alterar</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger">Excluir</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Alertas de Exclusão -->
+     <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-warning" role="alert">
+            Tem certeza que deseja excluir?<br></br>
+            <button type="button" class="btn btn-success">Sim</button>
+            <button type="button" class="btn btn-danger">Não</button>
+        </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-success" role="alert">
+          Cliente excluído com sucesso!
+        </div>
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-danger" role="alert">
+            Woops, algo deu errado!
+        </div>   
+      </div>
+    </div>
+    </div>
+
+
+   
+
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
