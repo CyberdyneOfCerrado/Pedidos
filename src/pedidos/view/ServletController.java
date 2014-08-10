@@ -36,8 +36,7 @@ public class ServletController {
 		MiniTemplator index = null;
 		MiniTemplator temp = null;
 		index = new MiniTemplator(servletContext+"index.html");
-		temp = new MiniTemplator(servletContext+separador+"home"+separador+"login.html");
-		index.setVariable("conteudo",temp.generateOutput());
+		index.setVariable("conteudo"," ");
 		return index.generateOutput();
 	};	
 	
