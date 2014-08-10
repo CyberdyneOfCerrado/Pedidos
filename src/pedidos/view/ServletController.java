@@ -1,6 +1,5 @@
 package pedidos.view;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import pedidos.control.UserCaseController;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
+import pedidos.viewUseCases.ManterClienteView;
 import biz.source_code.miniTemplator.MiniTemplator;
 import biz.source_code.miniTemplator.MiniTemplator.TemplateSyntaxException;
 
@@ -29,7 +29,7 @@ public class ServletController {
 	
 	//Adicionar todas as classes de gerenciamento de conteúdo aqui.
 	private void initViews(){
-		//listViews.put("manterUsuario", new ManterUsuarioView(servletContext,"manterUsuario"));
+		listViews.put("manterCliente", new ManterClienteView(servletContext,"manterCliente"));
 	};
 	
 	private String init() throws TemplateSyntaxException, IOException{

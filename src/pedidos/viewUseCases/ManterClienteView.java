@@ -16,12 +16,13 @@ public class ManterClienteView extends ViewController {
 
 	@Override
 	public String choose(ActionDone ad) {
-		String resul;
+		String resul=null;
 		switch(ad.getAction()){
 		case "incluir":
+			resul = "incluir";
 			break;
 		}
-		return null;
+		return resul;
 	}
 
 }
