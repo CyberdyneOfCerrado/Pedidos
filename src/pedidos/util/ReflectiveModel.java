@@ -1,10 +1,13 @@
 package pedidos.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.tomcat.util.bcel.classfile.Annotations;
 
 
 public class ReflectiveModel {
@@ -30,6 +33,7 @@ public class ReflectiveModel {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected <T>String getColumnValues(T classe ){
+		Converter con = new Converter();
 		Class<? extends Class> c = (Class<? extends Class>) classe.getClass();
 		String[] variables = getColumnName(classe).split(","); 
 		Method[] m = c.getDeclaredMethods();
@@ -45,7 +49,6 @@ public class ReflectiveModel {
 						 if(!m[b].getName().contains("pk")){
 							 Object concat = m[b].invoke(classe, null);
 							 concat = (concat == null)? " ":concat.toString();
-	
 							 if( t == Integer.TYPE){
 								 result += ","+concat;
 							 }else{
@@ -65,6 +68,7 @@ public class ReflectiveModel {
 	//inicia um Objeto a partir dos dados de uma doAction :|__|-+--[
 	protected <T>void buildObject(T classe,DoAction doAction){
 		Set keys = doAction.getHashtable().keySet();
+		Converter con = new Converter();
 		
 		Class c = classe.getClass();
 		Method[] m = c.getDeclaredMethods();
@@ -75,7 +79,9 @@ public class ReflectiveModel {
 				String key = i.next();
 				if(m[a].getName().equalsIgnoreCase("set"+key)){
 					try {
-						m[a].invoke(classe,doAction.getHashtable().get(key));
+						Type p[] = m[a].getGenericParameterTypes();
+						Object o = con.convert(doAction.getHashtable().get(key), p[0].toString());
+						m[a].invoke(classe,o);
 					} catch (IllegalAccessException | IllegalArgumentException
 							| InvocationTargetException e) {
 						e.printStackTrace();

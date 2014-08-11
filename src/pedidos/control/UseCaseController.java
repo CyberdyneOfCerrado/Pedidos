@@ -3,18 +3,19 @@ package pedidos.control;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
+import pedidos.useCases.ManterCliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
 
-public class UserCaseController {
+public class UseCaseController {
 	Hashtable<String,ModelController> listUserCase;
 	
-	public UserCaseController(){
+	public UseCaseController(){
 		listUserCase = new Hashtable<>(); 
 		
 		//Casos de uso novos devem ser adicionados aqui.
-		//listUserCase.put("manterUsuario", new UsuarioController());
+		 listUserCase.put("manterCliente", new ManterCliente());
 	};
 	
 	@SuppressWarnings("unchecked")
@@ -25,19 +26,19 @@ public class UserCaseController {
 		//4: invocar o método passando o doAction.
 		
 		//Validado se a requisição chegou nula.
-		if(doAction.getUserCase() == null){
+		if(doAction.getUseCase() == null){
 			return copy(doAction);
 		}
-		ModelController userCase = listUserCase.get(doAction.getUserCase());
+		ModelController useCase = listUserCase.get(doAction.getUseCase());
 		
 		//Validando existência do caso de uso.
-		if( userCase == null ){
+		if( useCase == null ){
 			//Gerar um actionDone
 			return copy(doAction);
 		}
 		//Fim validando caso de uso.
 		
-		String[] actions = userCase.getActions();
+		String[] actions = useCase.getActions();
 		
 		//Validando existência da ação
 		boolean temp = false;
@@ -50,11 +51,11 @@ public class UserCaseController {
 		
 		//----Atuando com reflexão------
 		@SuppressWarnings("rawtypes")
-		Class classe = userCase.getClass();
+		Class classe = useCase.getClass();
 		ActionDone actionDone = null;
 		try {
 			Method m   = classe.getMethod(doAction.getAction(),DoAction.class);
-			actionDone = (ActionDone) m.invoke(userCase,doAction);
+			actionDone = (ActionDone) m.invoke(useCase,doAction);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("Ocorreu um erro na ignição do método.");
@@ -63,6 +64,6 @@ public class UserCaseController {
 	};
 	
 	private ActionDone copy(DoAction da){
-		return new ActionDone(da.getUserCase(),da.getAction());
+		return new ActionDone(da.getUseCase(),da.getAction());
 	};
 }

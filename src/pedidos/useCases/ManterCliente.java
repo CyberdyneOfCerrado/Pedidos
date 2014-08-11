@@ -13,13 +13,13 @@ public class ManterCliente extends ModelController {
 		this.cc = new CrudController();
 	};
 	
-	public ActionDone incluir( DoAction da){
+	public ActionDone cadastrar( DoAction da){
 		Cliente c = new Cliente();
 		c.biuldObject(da);
-		ActionDone ad = cc.save(c.getColumnName(),c.getColumnName(),c.getColumnValues());
+		ActionDone ad = cc.save(c.getTableName(),c.getColumnName(),c.getColumnValues());
 		
 		ad.setAction(da.getAction());
-		ad.setUseCase(da.getUserCase());
+		ad.setUseCase(da.getUseCase());
 		ad.setStatus(true);
 		ad.setMessage("Você foi cadastrado com sucesso.");
 		return ad;
@@ -40,7 +40,7 @@ public class ManterCliente extends ModelController {
 	@Override
 	public String[] getActions() {
 		String [] temp ={
-							"incluir",
+							"cadastrar",
 							"alterar",
 							"excluir",
 							"consultar"

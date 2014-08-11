@@ -3,18 +3,18 @@ package pedidos.util;
 import java.util.Hashtable;
 
 public class DoAction {
-	private String userCase;
+	private String useCase;
 	private String action;
 	private Hashtable<String,Object> data;
 	
 	public DoAction(String userCase, String action){
-		this.userCase = userCase;
+		this.useCase = userCase;
 		this.action = action;
 		data = new Hashtable<>();
 	}
 
-	public String getUserCase() {
-		return userCase;
+	public String getUseCase() {
+		return useCase;
 	}
 
 	public String getAction() {

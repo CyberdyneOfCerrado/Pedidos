@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletRequest;
 
-import pedidos.control.UserCaseController;
+import pedidos.control.UseCaseController;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 import pedidos.viewUseCases.ManterClienteView;
@@ -15,14 +15,14 @@ import biz.source_code.miniTemplator.MiniTemplator.TemplateSyntaxException;
 //Cria o pacote geral de comunicação da aplicação 'DoAction' e gerencia as classes geradoreas de conteúdo.
 public class ServletController {
 	private String servletContext;
-	private UserCaseController ucc;
+	private UseCaseController ucc;
 	private Hashtable<String,ViewController> listViews;
 	String separador;
 	
 	public ServletController( String servletContext){
         separador = System.getProperty("file.separator");
 		this.servletContext = servletContext+"templates"+separador;
-		this.ucc = new UserCaseController();
+		this.ucc = new UseCaseController();
 		this.listViews = new Hashtable<>();
 		initViews();
 	};
@@ -51,7 +51,7 @@ public class ServletController {
 				ad = ucc.chooseUserCase(da);
 				ad.setData("redirect","false");
 			}else{
-				ad = new ActionDone(da.getUserCase(),da.getAction());
+				ad = new ActionDone(da.getUseCase(),da.getAction());
 				ad.setData("redirect","true");
 			}
 		}

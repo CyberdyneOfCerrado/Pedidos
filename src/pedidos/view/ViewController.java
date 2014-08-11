@@ -8,16 +8,16 @@ import pedidos.util.ActionDone;
 
 public abstract class ViewController {
 	private String sevletContext;
-	private String userCase;
+	private String useCase;
 	private String separador;
 	
-	public ViewController(String sevletContext,String userCase ){
+	public ViewController(String sevletContext,String useCase ){
 		separador = System.getProperty("file.separator");
 		this.sevletContext = sevletContext;
-		this.userCase = userCase+separador;
+		this.useCase = useCase+separador;
 	};
 	
-	private MiniTemplator startMiniTemplator(String path){
+	protected MiniTemplator startMiniTemplator(String path){
 		MiniTemplator mi = null;
 		try {
 			System.out.println(path);
@@ -29,5 +29,23 @@ public abstract class ViewController {
 		return mi;
 	};
 	
+	protected String getTemplate (ActionDone ad){
+		String temp = getSevletContext()+getUseCase()+ad.getAction()+".html";
+		System.out.println(temp);
+		return temp;
+	};
+	
+	public String getSevletContext() {
+		return sevletContext;
+	}
+
+	public String getUseCase() {
+		return useCase;
+	}
+
+	public String getSeparador() {
+		return separador;
+	}
+
 	public abstract String choose( ActionDone ad );
 }

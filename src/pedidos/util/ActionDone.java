@@ -16,7 +16,7 @@ public class ActionDone {
 	};
 	
 	public ActionDone(DoAction da){
-		this.useCase = da.getUserCase();
+		this.useCase = da.getUseCase();
 		this.action   = da.getAction();
 		this.data     = (Hashtable<String, Object>) da.getHashtable().clone(); 
 	};
