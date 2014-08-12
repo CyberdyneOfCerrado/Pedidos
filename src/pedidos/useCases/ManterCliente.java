@@ -19,6 +19,7 @@ public class ManterCliente extends ModelController {
 		
 		ActionDone ad = cc.save(c);
 		
+		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
 		ad.setStatus(true);
@@ -35,8 +36,14 @@ public class ManterCliente extends ModelController {
 		return null;
 	};
 	
-	public ActionDone consultar( DoAction ad){
-		return null;
+	public ActionDone consultar( DoAction da){
+		ActionDone ad = cc.select(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
 	};
 	
 	@Override

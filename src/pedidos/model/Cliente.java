@@ -10,6 +10,16 @@ public class Cliente extends ReflectiveModel implements IReflectiveModel{
 	private String sexo;
 	private String nome;
 
+	public Cliente( int pk , String nome, int idade, String sexo){
+		this.pk = pk;
+		this.idade = idade;
+		this.nome = nome;
+		this.sexo = sexo;
+	}
+	
+	public Cliente(){
+		
+	}
 	public int getPk() {
 		return pk;
 	}

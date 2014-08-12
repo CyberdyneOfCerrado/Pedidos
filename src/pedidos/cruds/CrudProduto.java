@@ -2,23 +2,22 @@ package pedidos.cruds;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import pedidos.control.CrudController;
 import pedidos.model.Cliente;
+import pedidos.model.Produto;
 import pedidos.util.ActionDone;
-import pedidos.util.DoAction;
 
-public class CrudCliente extends CrudController{
+public class CrudProduto extends CrudController {
 	
-	public CrudCliente(){
+	public CrudProduto(){
 		super();
 	};
 	
-	public ActionDone save   ( Cliente c){
-		String table = c.getTableName();
-		String columns = c.getColumnName();
-		String values = c.getColumnValues();
+	public ActionDone save   ( Produto p){
+		String table = p.getTableName();
+		String columns = p.getColumnName();
+		String values = p.getColumnValues();
 		
 		ActionDone ad = new ActionDone();
 		String sql = "insert into "+ table +" ("+columns+") values ("+values+")";
@@ -60,40 +59,28 @@ public class CrudCliente extends CrudController{
 		return ad;
 	};
 	
-	public ActionDone select ( DoAction da ){
+	public ActionDone select ( String table,String select ,String columns , String values){
 		ActionDone ad = new ActionDone();
-		String sql = "select * from cliente where ";
-		boolean isNumber = false;
-		int value = 0;
-		String search = (String) da.getHashtable().get("search");
-		try{
-			value = Integer.parseInt(search);
-			isNumber = true;
-		}catch( Exception e){
-		}
-		
-		
-		if(!isNumber){
-			sql += "nome =  "+ "'"+search+"'";
+		String sql = "select "+ select +" from " + table +" where ";
+		String[] col = columns.split(",");
+		String[] val = values.split(",");
+		if( val.length == 1){
+			sql += "pk = "+val[0];
 		}else{
-			sql += "idade = " +value;
+			for( int a = 0 ; a < col.length ; a++ )sql += col[a]+"="+val[a]+" and ";
+			sql = sql.substring(0,sql.length()-4);
 		}
-		
 		ResultSet result = super.runWithResult(sql);
-		
-		ArrayList<Cliente> arl = new ArrayList<>();
+		String[] selection = select.split(",");
 		try {
 			while( result.next()){
-					arl.add(new Cliente(Integer.parseInt(result.getString(1)),
-														result.getString(2),
-										Integer.parseInt(result.getString(3)),
-														result.getString(4)));
-					System.out.println(result.getString(4));
+				for( int a = 1 ; a <= selection.length ; a++ ){
+					ad.setData(result.getMetaData().getColumnName(a), result.getString(a));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		ad.setData("search",arl);
 		return ad;
 	};
 }

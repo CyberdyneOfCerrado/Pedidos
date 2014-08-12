@@ -1,6 +1,10 @@
 package pedidos.viewUseCases;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+
 import biz.source_code.miniTemplator.MiniTemplator;
+import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
 
@@ -35,8 +39,33 @@ public class ManterClienteView extends ViewController {
 	}
 	
 	private String consultar( ActionDone ad){
-		MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
-		return temp.generateOutput();
+		String resul = "";
+		if(!ad.isProcessed()){
+			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+			
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"row.html");
+				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("search");
+				 for(Cliente cliente : arl ){
+					 
+					 temp.setVariable("pk",cliente.getPk());
+					 temp.setVariable("idade",cliente.getIdade());
+					 temp.setVariable("sexo", cliente.getSexo());
+					 temp.setVariable("nome", cliente.getNome());
+					 
+					 temp.addBlock("table");
+				 }
+				 
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
 	}
 
 	@Override

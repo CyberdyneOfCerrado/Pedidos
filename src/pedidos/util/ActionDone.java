@@ -1,6 +1,9 @@
 package pedidos.util;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
+
+import javax.lang.model.util.Elements;
 
 public class ActionDone {
 	private boolean status;
@@ -28,6 +31,9 @@ public class ActionDone {
 		this.data = new Hashtable<>();
 	};
 	
+	public Enumeration<Object> getCollection(){
+		return data.elements();
+	}
 	public Object getData(String key){
 		return data.get(key);
 	};

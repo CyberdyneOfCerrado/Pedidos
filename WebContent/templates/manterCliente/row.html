@@ -1,4 +1,4 @@
-
+     
     <!--Container principal -->
     <div class="container">
       <h1>Consultar Cliente</h1>
@@ -26,6 +26,7 @@
         <tr>
           <td>Nome</td>
           <td>Idade</td>
+          <td>Sexo </td>
           <td>
             <strong>Alterar</strong>
           </td>
@@ -33,6 +34,19 @@
             <strong>Excluir</strong>
           </td>
         </tr>
+        <!-- $BeginBlock table -->
+        <tr>
+        	<td>${nome}</td>
+        	<td>${idade}</td>
+        	<td>${sexo}</td>
+        	<td>
+            	<a href="q?useCase=manterCliente&action=alterar&redirect=false&pk=${pk}" class="btn btn-primary">Alterar</a>
+          	</td>
+          	<td>
+            	<a href="q?useCase=manterCliente&action=alterar&redirect=false&pk=${pk}" class="btn btn-danger">Excluir</a>
+          	</td>
+        </tr>
+        <!-- $EndBlock table -->
       </table>
     </div>
 

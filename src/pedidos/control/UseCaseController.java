@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Hashtable;
 
 import pedidos.useCases.ManterCliente;
+import pedidos.useCases.ManterProduto;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
@@ -16,6 +17,7 @@ public class UseCaseController {
 		
 		//Casos de uso novos devem ser adicionados aqui.
 		 listUserCase.put("manterCliente", new ManterCliente());
+		 listUserCase.put("manterProduto", new ManterProduto());
 	};
 	
 	@SuppressWarnings("unchecked")
