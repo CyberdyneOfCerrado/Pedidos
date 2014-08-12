@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 public class ActionDone {
 	private boolean status;
+	private boolean processed;
 	private Hashtable<String,Object> data;
 	private String  message;
 	private String  useCase;
@@ -13,12 +14,14 @@ public class ActionDone {
 		this.data = new Hashtable<>();
 		this.useCase = userCase;
 		this.action = action;
+		this.setProcessed(false);
 	};
 	
 	public ActionDone(DoAction da){
 		this.useCase = da.getUseCase();
 		this.action   = da.getAction();
-		this.data     = (Hashtable<String, Object>) da.getHashtable().clone(); 
+		this.data     = (Hashtable<String, Object>) da.getHashtable().clone();
+		this.setProcessed(false);
 	};
 	
 	public ActionDone(){
@@ -62,5 +65,13 @@ public class ActionDone {
 	
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	public boolean isProcessed() {
+		return processed;
+	}
+
+	public void setProcessed(boolean processed) {
+		this.processed = processed;
 	};
 }

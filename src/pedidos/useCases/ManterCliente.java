@@ -1,26 +1,28 @@
 package pedidos.useCases;
 
-import pedidos.control.CrudController;
 import pedidos.control.ModelController;
+import pedidos.cruds.CrudCliente;
 import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
 public class ManterCliente extends ModelController {
-	private CrudController cc;
+	private CrudCliente cc;
 	
 	public ManterCliente(){
-		this.cc = new CrudController();
+		this.cc = new CrudCliente();
 	};
 	
 	public ActionDone cadastrar( DoAction da){
 		Cliente c = new Cliente();
 		c.biuldObject(da);
-		ActionDone ad = cc.save(c.getTableName(),c.getColumnName(),c.getColumnValues());
+		
+		ActionDone ad = cc.save(c);
 		
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
 		ad.setStatus(true);
+		ad.setProcessed(true);
 		ad.setMessage("Você foi cadastrado com sucesso.");
 		return ad;
 	};
