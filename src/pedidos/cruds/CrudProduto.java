@@ -2,11 +2,13 @@ package pedidos.cruds;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import pedidos.control.CrudController;
 import pedidos.model.Cliente;
 import pedidos.model.Produto;
 import pedidos.util.ActionDone;
+import pedidos.util.DoAction;
 
 public class CrudProduto extends CrudController {
 	
@@ -59,28 +61,38 @@ public class CrudProduto extends CrudController {
 		return ad;
 	};
 	
-	public ActionDone select ( String table,String select ,String columns , String values){
+	public ActionDone select ( DoAction da ){
 		ActionDone ad = new ActionDone();
-		String sql = "select "+ select +" from " + table +" where ";
-		String[] col = columns.split(",");
-		String[] val = values.split(",");
-		if( val.length == 1){
-			sql += "pk = "+val[0];
-		}else{
-			for( int a = 0 ; a < col.length ; a++ )sql += col[a]+"="+val[a]+" and ";
-			sql = sql.substring(0,sql.length()-4);
+		String sql = "select * from produto where ";
+		boolean isNumber = false;
+		int value = 0;
+		String search = (String) da.getHashtable().get("search");
+		try{
+			value = Integer.parseInt(search);
+			isNumber = true;
+		}catch( Exception e){
 		}
+		
+		
+		if(!isNumber){
+			sql += "nome =  "+ "'"+search+"'";
+		}else{
+			sql += "preco = " +value;
+		}
+		
 		ResultSet result = super.runWithResult(sql);
-		String[] selection = select.split(",");
+		
+		ArrayList<Produto> arl = new ArrayList<>();
 		try {
 			while( result.next()){
-				for( int a = 1 ; a <= selection.length ; a++ ){
-					ad.setData(result.getMetaData().getColumnName(a), result.getString(a));
-				}
+					arl.add(new Produto(Integer.parseInt(result.getString(1)),
+														result.getString(2),
+										Integer.parseInt(result.getString(3))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		ad.setData("search",arl);
 		return ad;
 	};
 }

@@ -5,10 +5,19 @@ import pedidos.util.DoAction;
 import pedidos.util.ReflectiveModel;
 
 public class Produto extends ReflectiveModel implements IReflectiveModel {
+	private int pk;
 	private String nome;
 	private int preco;
 	
+	public Produto(int pk , String nome , int preco){
+		this.pk = pk;
+		this.nome = nome;
+		this.preco = preco;
+	}
 	
+	public Produto(){
+		
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -43,5 +52,13 @@ public class Produto extends ReflectiveModel implements IReflectiveModel {
 	@Override
 	public void biuldObject(DoAction doAction) {
 		super.buildObject(this, doAction);
+	}
+
+	public int getPk() {
+		return pk;
+	}
+
+	public void setPk(int pk) {
+		this.pk = pk;
 	}
 }

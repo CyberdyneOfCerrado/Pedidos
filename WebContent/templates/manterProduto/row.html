@@ -34,6 +34,19 @@
           </td>
         </tr>
         
+         <!-- $BeginBlock table -->
+        <tr>
+        	<td>${nome}</td>
+        	<td>${preco}</td>
+        	<td>
+            	<a href="q?useCase=manterProduto&action=alterar&redirect=false&pk=${pk}" class="btn btn-primary">Alterar</a>
+          	</td>
+          	<td>
+            	<a href="q?useCase=manterProduto&action=excluir&redirect=false&pk=${pk}" class="btn btn-danger">Excluir</a>
+          	</td>
+        </tr>
+        <!-- $EndBlock table -->
+        
       </table>
     </div>
 

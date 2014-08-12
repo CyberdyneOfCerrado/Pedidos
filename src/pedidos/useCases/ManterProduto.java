@@ -28,6 +28,16 @@ public class ManterProduto extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone consultar( DoAction da){
+		ActionDone ad = cp.select(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
 	@Override
 	public String[] getActions() {
 		String[] actions ={
