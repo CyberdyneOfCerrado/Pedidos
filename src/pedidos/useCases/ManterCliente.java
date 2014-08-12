@@ -32,8 +32,15 @@ public class ManterCliente extends ModelController {
 		return null;
 	};
 	
-	public ActionDone excluir( DoAction ad){
-		return null;
+	public ActionDone excluir( DoAction da){
+		ActionDone ad = cc.delete(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setMessage("Cliente excluído com sucesso!");
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
 	};
 	
 	public ActionDone consultar( DoAction da){

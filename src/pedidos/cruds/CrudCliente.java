@@ -48,7 +48,10 @@ public class CrudCliente extends CrudController{
 		return ad;
 	};
 	
-	public ActionDone delete ( String table, String pk){
+	public ActionDone delete ( DoAction da ){
+		 String table  = "cliente"; 
+		 String pk     = (String )da.getHashtable().get("pk");
+		 
 		ActionDone ad = new ActionDone();
 		String sql ="delete from " +table +" where pk = "+pk;
 		

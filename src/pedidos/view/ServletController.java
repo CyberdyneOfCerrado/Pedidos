@@ -53,8 +53,7 @@ public class ServletController {
 				ad = ucc.chooseUserCase(da);
 				ad.setData("redirect","false");
 			}else{
-				ad = new ActionDone(da.getUseCase(),da.getAction());
-				ad.setData("redirect","true");
+				ad = new ActionDone(da.getUseCase(),da.getAction(),da.getHashtable());
 			}
 		}
 		return readActionDone(ad);

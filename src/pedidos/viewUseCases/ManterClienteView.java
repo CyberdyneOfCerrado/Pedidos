@@ -67,7 +67,27 @@ public class ManterClienteView extends ViewController {
 		}
 		return resul;
 	}
-
+    
+	private String excluir( ActionDone ad){
+		String resul = "";
+		if(ad.isProcessed()){
+			MiniTemplator temp;
+			temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+			
+			temp.setVariable("mensagem",ad.getMessage());
+				
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
+				  
+				 temp.setVariable("pk",(String) ad.getData("pk"));
+				 resul = temp.generateOutput();
+			
+		}
+		return resul;
+	}
+	
 	@Override
 	public String choose(ActionDone ad) {
 		String resul=null;
@@ -80,6 +100,9 @@ public class ManterClienteView extends ViewController {
 			break;
 		case "consultar":
 			resul = consultar(ad);
+			break;
+		case "excluir":
+			resul = excluir(ad);
 			break;
 		}
 		return resul;

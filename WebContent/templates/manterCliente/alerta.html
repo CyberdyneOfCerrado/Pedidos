@@ -1,0 +1,16 @@
+<!-- Alertas de Exclusão -->
+	<form action="q" method="post">
+     <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-warning" role="alert">
+            Tem certeza que deseja excluir?<br></br>
+            <button type="submit" class="btn btn-success">Sim</button>
+            <button type="submit" class="btn btn-danger">Não</button>
+        </div>
+        </div>
+    </div>
+    <input type="hidden" name="pk" value="${pk}" />
+    <input type="hidden" name="useCase" value="manterCliente" />
+	<input type="hidden" name="action" value="excluir" />
+	<input type="hidden" name="redirect" value="false" />
+	</form>

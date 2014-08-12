@@ -13,13 +13,19 @@ public class ActionDone {
 	private String  useCase;
 	private String  action;
 	
+	public ActionDone(String userCase , String action , Hashtable<String,Object> data ){
+		this.data = data;
+		this.useCase = userCase;
+		this.action = action;
+		this.setProcessed(false);
+	};
+	
 	public ActionDone(String userCase , String action){
 		this.data = new Hashtable<>();
 		this.useCase = userCase;
 		this.action = action;
 		this.setProcessed(false);
 	};
-	
 	public ActionDone(DoAction da){
 		this.useCase = da.getUseCase();
 		this.action   = da.getAction();
