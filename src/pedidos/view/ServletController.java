@@ -9,6 +9,7 @@ import pedidos.control.UseCaseController;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 import pedidos.viewUseCases.ManterClienteView;
+import pedidos.viewUseCases.ManterPedidoView;
 import pedidos.viewUseCases.ManterProdutoView;
 import biz.source_code.miniTemplator.MiniTemplator;
 import biz.source_code.miniTemplator.MiniTemplator.TemplateSyntaxException;
@@ -32,6 +33,7 @@ public class ServletController {
 	private void initViews(){
 		listViews.put("manterCliente", new ManterClienteView(servletContext,"manterCliente"));
 		listViews.put("manterProduto", new ManterProdutoView(servletContext,"manterProduto"));
+		listViews.put("manterPedido", new ManterPedidoView(servletContext,"manterPedido"));
 	};
 	
 	private String init() throws TemplateSyntaxException, IOException{

@@ -31,7 +31,12 @@ public class CrudProduto extends CrudController {
 		return ad;
 	};
 	
-	public ActionDone update ( String table, String columns , String values, String pk){
+	public ActionDone update ( Produto p ){
+		String table = p.getTableName();
+		String columns = p.getColumnName();
+		String values = p.getColumnValues();
+		String pk = String.valueOf(p.getPk());
+		
 		ActionDone ad = new ActionDone();
 		String sql ="update "+ table+" set ";
 		String[] col = columns.split(",");
@@ -49,7 +54,10 @@ public class CrudProduto extends CrudController {
 		return ad;
 	};
 	
-	public ActionDone delete ( String table, String pk){
+	public ActionDone delete ( DoAction da ){
+		 String table  = "produto"; 
+		 String pk     = (String )da.getHashtable().get("pk");
+		 
 		ActionDone ad = new ActionDone();
 		String sql ="delete from " +table +" where pk = "+pk;
 		

@@ -1,14 +1,8 @@
-
+     
     <!--Container principal -->
     <div class="container">
-      <h1>Listar Todos os Clientes</h1>
-      <div class="row">
-        <div class="col-md-12">           
-        </div>
-      </div>
-
- 
-
+    <h1>Consultar Cliente</h1>
+    
     <!-- Tabela de resultados -->
     <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -18,41 +12,29 @@
         <tr>
           <td>Nome</td>
           <td>Idade</td>
-          <td>Sexo</td>
+          <td>Sexo </td>
           <td>
-            <button type="button" class="btn btn-primary" href="#">Alterar</button>
+            <strong>Alterar</strong>
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Excluir</button>
+            <strong>Excluir</strong>
           </td>
         </tr>
+        <!-- $BeginBlock table -->
+        <tr>
+        	<td>${nome}</td>
+        	<td>${idade}</td>
+        	<td>${sexo}</td>
+        	<td>
+            	<a href="q?useCase=manterCliente&action=alterar&redirect=true&pk=${pk}&nome=${nome}&idade=${idade}&sexo=${sexo}" class="btn btn-primary">Alterar</a>
+          	</td>
+          	<td>
+            	<a href="q?useCase=manterCliente&action=excluir&redirect=true&pk=${pk}" class="btn btn-danger">Excluir</a>
+          	</td>
+        </tr>
+        <!-- $EndBlock table -->
       </table>
     </div>
 
-    <!-- Alertas de Exclusão -->
-     <div class="row">
-      <div class="col-md-5 col-md-offset-3">
-        <div class="alert alert-warning" role="alert">
-            Tem certeza que deseja excluir?<br></br>
-            <button type="button" class="btn btn-success">Sim</button>
-            <button type="button" class="btn btn-danger">Não</button>
-        </div>
-        </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-5 col-md-offset-3">
-        <div class="alert alert-success" role="alert">
-          Cliente excluído com sucesso!
-        </div>
-        </div>
-      </div>
-
-    <div class="row">
-      <div class="col-md-5 col-md-offset-3">
-        <div class="alert alert-danger" role="alert">
-            Woops, algo deu errado!
-        </div>   
-      </div>
-    </div>
+    
     </div>

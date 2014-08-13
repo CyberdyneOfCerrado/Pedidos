@@ -28,10 +28,6 @@ public class ManterCliente extends ModelController {
 		return ad;
 	};
 	
-	public ActionDone alterar( DoAction ad){
-		return null;
-	};
-	
 	public ActionDone excluir( DoAction da){
 		ActionDone ad = cc.delete(da);
 		//Identificando o pacote
@@ -53,13 +49,36 @@ public class ManterCliente extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone alterar( DoAction da){
+		Cliente c = new Cliente();
+		c.biuldObject(da);
+		ActionDone ad = cc.update(c);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
+	public ActionDone listar( DoAction da){
+		ActionDone ad = cc.selectAll(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
 	@Override
 	public String[] getActions() {
 		String [] temp ={
 							"cadastrar",
 							"alterar",
 							"excluir",
-							"consultar"
+							"consultar",
+							"listar"
 						};
 		return temp;
 	};

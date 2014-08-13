@@ -30,7 +30,12 @@ public class CrudCliente extends CrudController{
 		return ad;
 	};
 	
-	public ActionDone update ( String table, String columns , String values, String pk){
+	public ActionDone update ( Cliente c ){
+		String table = c.getTableName();
+		String columns = c.getColumnName();
+		String values = c.getColumnValues();
+		String pk = String.valueOf(c.getPk());
+		
 		ActionDone ad = new ActionDone();
 		String sql ="update "+ table+" set ";
 		String[] col = columns.split(",");
@@ -98,5 +103,25 @@ public class CrudCliente extends CrudController{
 		}
 		ad.setData("search",arl);
 		return ad;
-	};
+	}
+	
+	public ActionDone selectAll ( DoAction da ){
+		ActionDone ad = new ActionDone();
+		String sql = "select * from cliente";
+		ResultSet result = super.runWithResult(sql);
+		ArrayList<Cliente> arl = new ArrayList<>();
+		try {
+			while( result.next()){
+					arl.add(new Cliente(Integer.parseInt(result.getString(1)),
+														result.getString(2),
+										Integer.parseInt(result.getString(3)),
+														result.getString(4)));
+					System.out.println(result.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ad.setData("todos",arl);
+		return ad;
+	}
 }

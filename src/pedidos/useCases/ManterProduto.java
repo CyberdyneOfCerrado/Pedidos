@@ -38,6 +38,28 @@ public class ManterProduto extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone alterar( DoAction da){
+		Produto p = new Produto();
+		p.biuldObject(da);
+		ActionDone ad = cp.update(p);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
+	public ActionDone excluir( DoAction da){
+		ActionDone ad = cp.delete(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setMessage("Cliente excluído com sucesso!");
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
 	@Override
 	public String[] getActions() {
 		String[] actions ={
