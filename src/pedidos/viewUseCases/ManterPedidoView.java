@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import biz.source_code.miniTemplator.MiniTemplator;
 import pedidos.model.Cliente;
+import pedidos.model.Produto;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
 
@@ -42,6 +43,35 @@ public class ManterPedidoView extends ViewController {
 		return resul;
 	}
 	
+	private String pedido(ActionDone ad) {
+		String resul = "";
+		if(!ad.isProcessed()){
+			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+			
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getTemplate(ad));
+				 temp.setVariable("nomeCliente", (String) ad.getData("nome"));
+				 ArrayList<Produto> arl = (ArrayList<Produto>) ad.getData("todos");
+				 for(Produto produto : arl ){
+					 temp.setVariable("pkCliente", (String) ad.getData("pk"));
+					 temp.setVariable("idPedido", String.valueOf(ad.getData("idPedido")));
+					 temp.setVariable("pkProduto",produto.getPk());
+					 temp.setVariable("nome", produto.getNome());
+					 temp.setVariable("preco", produto.getPreco());
+					 temp.addBlock("table");
+				 }
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
+	}
+	
 	@Override
 	public String choose(ActionDone ad) {
 		String resul=null;
@@ -49,8 +79,14 @@ public class ManterPedidoView extends ViewController {
 		case "listar":
 			resul = listar(ad);
 			break;
+		case "pedido":
+			resul = pedido(ad);
+			break;
 		}
+		
 		return resul;
 	}
+
+	
 
 }

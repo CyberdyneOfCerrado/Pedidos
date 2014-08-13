@@ -25,7 +25,12 @@ public class DoAction {
 		data.put(key, o);
 	}
 	
-	public Hashtable getHashtable(){
+
+	public String getData(String key){
+		return (String) this.data.get(key);
+	}
+
+	public Hashtable<String,Object> getHashtable() {
 		return this.data;
 	}
 }

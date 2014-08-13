@@ -55,7 +55,7 @@ public class CrudCliente extends CrudController{
 	
 	public ActionDone delete ( DoAction da ){
 		 String table  = "cliente"; 
-		 String pk     = (String )da.getHashtable().get("pk");
+		 String pk     = (String )da.getData("pk");
 		 
 		ActionDone ad = new ActionDone();
 		String sql ="delete from " +table +" where pk = "+pk;
@@ -73,7 +73,7 @@ public class CrudCliente extends CrudController{
 		String sql = "select * from cliente where ";
 		boolean isNumber = false;
 		int value = 0;
-		String search = (String) da.getHashtable().get("search");
+		String search = (String) da.getData("search");
 		try{
 			value = Integer.parseInt(search);
 			isNumber = true;

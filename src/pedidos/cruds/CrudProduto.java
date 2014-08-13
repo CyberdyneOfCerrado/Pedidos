@@ -56,7 +56,7 @@ public class CrudProduto extends CrudController {
 	
 	public ActionDone delete ( DoAction da ){
 		 String table  = "produto"; 
-		 String pk     = (String )da.getHashtable().get("pk");
+		 String pk     = (String )da.getData("pk");
 		 
 		ActionDone ad = new ActionDone();
 		String sql ="delete from " +table +" where pk = "+pk;
@@ -74,7 +74,7 @@ public class CrudProduto extends CrudController {
 		String sql = "select * from produto where ";
 		boolean isNumber = false;
 		int value = 0;
-		String search = (String) da.getHashtable().get("search");
+		String search = (String) da.getData("search");
 		try{
 			value = Integer.parseInt(search);
 			isNumber = true;
@@ -103,4 +103,27 @@ public class CrudProduto extends CrudController {
 		ad.setData("search",arl);
 		return ad;
 	};
+	
+	public ActionDone selectAll ( DoAction da ){
+		ActionDone ad = new ActionDone();
+		String sql = "select * from produto";
+		ResultSet result = super.runWithResult(sql);
+		ArrayList<Produto> arl = new ArrayList<>();
+		try {
+			while( result.next()){
+				arl.add(new Produto(Integer.parseInt(result.getString(1)),
+													result.getString(2),
+									Integer.parseInt(result.getString(3))));
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ad.setData("todos",arl);
+		return ad;
+	}
+
+	public ActionDone cadastrar(DoAction da) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -51,7 +51,7 @@ public class ServletController {
 			return init();
 		}else{
 		//Se ação ao informada for do tipo 'redirect' os dados não devem ser enviados
-			if( da.getHashtable().get("redirect").equals("false")){
+			if( da.getData("redirect").equals("false")){
 				ad = ucc.chooseUserCase(da);
 				ad.setData("redirect","false");
 			}else{

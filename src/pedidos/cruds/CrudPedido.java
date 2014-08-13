@@ -33,4 +33,20 @@ public class CrudPedido extends CrudController {
 		ad.setData("todos",arl);
 		return ad;
 	}
+	
+	public String criarPedido(DoAction da) {
+
+		String sql = "insert into pedido (valor,cliente_id) values (0,"+da.getData("pk")+")";
+		super.run(sql);
+		
+		ResultSet result = super.runWithResult("select pk from pedido where pk = (select max(pk) from pedido )");
+		try {
+			while( result.next()) return result.getString(1);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";		
+	};
 }

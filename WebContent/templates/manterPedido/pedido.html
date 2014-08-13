@@ -1,0 +1,34 @@
+<!--Container principal -->
+    <div class="container">
+      <h1>Adicionar ao carrinho(a) ${nomeCliente}</h1>
+     <div>
+      <h3>Valor do pedido </h3> <strong>R$:</strong><strong id="valor">0</strong>
+     </div>
+     
+    <!-- Tabela de resultados -->
+    <div class="panel panel-default" >
+      <!-- Default panel contents -->
+      <div class="panel-heading">Produtos disponíveis</div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <td>Nome</td>
+          <td>Preço</td>
+          <td>
+            <strong>Adicionar</strong>
+          </td>
+        </tr>
+        
+         <!-- $BeginBlock table -->
+        <tr>
+        	<td>${nome}</td>
+        	<td>${preco}</td>
+        	<td>
+        		<!-- href="q?useCase=manterPedido&action=cadastrar&redirect=false&pkProduto=${pkProduto}&pkCliente=${pkCliente}" -->
+            	<button  onclick="cadastrar('${pkProduto}','${pkCliente}','${preco}','${idPedido}')" class="btn btn-primary">Add</button>
+          	</td>
+        </tr>
+        <!-- $EndBlock table -->
+      </table>
+    </div>
+    </div>

@@ -80,7 +80,7 @@ public class ReflectiveModel {
 				if(m[a].getName().equalsIgnoreCase("set"+key)){
 					try {
 						Type p[] = m[a].getGenericParameterTypes();
-						Object o = con.convert(doAction.getHashtable().get(key), p[0].toString());
+						Object o = con.convert(doAction.getData(key), p[0].toString());
 						m[a].invoke(classe,o);
 					} catch (IllegalAccessException | IllegalArgumentException
 							| InvocationTargetException e) {
