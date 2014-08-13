@@ -1,0 +1,32 @@
+<!--Container principal -->
+    <div class="container">
+    <h1>Consultar Cliente</h1>
+    
+    <!-- Tabela de resultados -->
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Resultados</div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <td>Nome</td>
+          <td>
+            <strong>Ação</strong>
+          </td>
+        </tr>
+        <!-- $BeginBlock table -->
+        <tr>
+        	<td>${nome}</td>
+        	<td>
+            	<a href="q?useCase=manterPedido&action=pedido&redirect=true&pk=${pk}" class="btn btn-primary">Criar um pedido</a>
+          	</td>
+        </tr>
+        <!-- $EndBlock table -->
+      </table>
+    </div>
+
+    </div>
+
+  
+    
+     

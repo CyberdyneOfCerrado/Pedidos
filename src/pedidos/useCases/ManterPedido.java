@@ -10,6 +10,7 @@ public class ManterPedido extends ModelController {
 	
 	public ManterPedido(){
 		super();
+		cp = new CrudPedido();
 	}
 	
 	public ActionDone listar( DoAction da){
@@ -26,9 +27,10 @@ public class ManterPedido extends ModelController {
 	public String[] getActions() {
 		String[] actions ={
 							"listar",
-							"cadastrar"
+							"cadastrar",
+							"pedido"
 						  };
-		return null;
+		return actions;
 	}
 
 	@Override

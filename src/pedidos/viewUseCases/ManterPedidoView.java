@@ -14,7 +14,7 @@ public class ManterPedidoView extends ViewController {
 		// TODO Auto-generated constructor stub
 	};
 
-	private String cadastrar ( ActionDone ad){
+	private String listar ( ActionDone ad){
 		String resul = "";
 		if(!ad.isProcessed()){
 			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
@@ -28,8 +28,6 @@ public class ManterPedidoView extends ViewController {
 				 for(Cliente cliente : arl ){
 					 
 					 temp.setVariable("pk",cliente.getPk());
-					 temp.setVariable("idade",cliente.getIdade());
-					 temp.setVariable("sexo", cliente.getSexo());
 					 temp.setVariable("nome", cliente.getNome());
 					 
 					 temp.addBlock("table");
@@ -48,8 +46,8 @@ public class ManterPedidoView extends ViewController {
 	public String choose(ActionDone ad) {
 		String resul=null;
 		switch(ad.getAction()){
-		case "cadastrar":
-			resul = cadastrar(ad);
+		case "listar":
+			resul = listar(ad);
 			break;
 		}
 		return resul;
