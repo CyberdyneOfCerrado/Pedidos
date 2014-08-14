@@ -13,7 +13,11 @@ public class Adm extends ReflectiveModel implements IReflectiveModel{
 		
 	};
 	
-	
+	public Adm( int pk , String email , String senha){
+		this.pk = pk;
+		this.email = email;
+		this.senha = senha;
+	}
 	public int getPk() {
 		return pk;
 	}

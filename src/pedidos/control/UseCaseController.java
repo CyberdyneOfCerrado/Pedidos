@@ -3,6 +3,7 @@ package pedidos.control;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
+import pedidos.useCases.ManterAdm;
 import pedidos.useCases.ManterCliente;
 import pedidos.useCases.ManterPedido;
 import pedidos.useCases.ManterProduto;
@@ -20,6 +21,7 @@ public class UseCaseController {
 		 listUserCase.put("manterCliente", new ManterCliente());
 		 listUserCase.put("manterProduto", new ManterProduto());
 		 listUserCase.put("manterPedido", new ManterPedido());
+		 listUserCase.put("manterAdm", new ManterAdm());
 	};
 	
 	@SuppressWarnings("unchecked")

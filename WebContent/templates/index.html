@@ -17,7 +17,19 @@
      <nav class="navbar navbar-default navbar-fixed-top menu" role="navigation">
       <div class="container-fluid">
         <div class="row">   
-
+			      <!-- Single button -->
+          <div class="col-md-1">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+           Adm<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="q?useCase=manterAdm&action=login&redirect=true">Login</a></li>
+          <li><a href="q?useCase=manterAdm&action=cadastrar&redirect=true">Cadastrar</a></li>
+          <li><a href="q?useCase=manterAdm&action=consultar&redirect=true">Consultar</a></li>
+        </ul>
+      </div>
+      </div>
           <!-- Single button -->
           <div class="col-md-1">
          <div class="btn-group">
@@ -26,7 +38,6 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a href="q?useCase=manterCliente&action=cadastrar&redirect=true">Cadastrar</a></li>
-          <li><a href="q?useCase=manterCliente&action=login&redirect=true">Login</a></li>
           <li><a href="q?useCase=manterCliente&action=consultar&redirect=true">Consultar</a></li>
           <li><a href="q?useCase=manterCliente&action=listar&redirect=false">Listar Todos</a></li>
           <li><a href="q?useCase=manterCliente&action=categoria&redirect=true">Busca Por Categoria</a></li>
@@ -60,7 +71,7 @@
           </div>
 
             <!-- Single button -->
-            <div class="col-md-1 col-md-offset-8">
+            <div class="col-md-1 col-md-offset-7">
             <button type="button" class="btn btn-default">Sair</button> 
             </div>
 

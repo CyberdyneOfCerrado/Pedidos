@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import pedidos.control.UseCaseController;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
+import pedidos.viewUseCases.ManterAdmView;
 import pedidos.viewUseCases.ManterClienteView;
 import pedidos.viewUseCases.ManterPedidoView;
 import pedidos.viewUseCases.ManterProdutoView;
@@ -34,6 +35,7 @@ public class ServletController {
 		listViews.put("manterCliente", new ManterClienteView(servletContext,"manterCliente"));
 		listViews.put("manterProduto", new ManterProdutoView(servletContext,"manterProduto"));
 		listViews.put("manterPedido", new ManterPedidoView(servletContext,"manterPedido"));
+		listViews.put("manterAdm", new ManterAdmView(servletContext,"manterAdm"));
 	};
 	
 	private String init() throws TemplateSyntaxException, IOException{

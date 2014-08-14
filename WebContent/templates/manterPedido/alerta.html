@@ -1,0 +1,16 @@
+<!-- Alertas de Exclusão -->
+	<form action="q" method="post">
+     <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-warning" role="alert">
+            Tem certeza que deseja excluir?<br></br>
+            <button type="submit" class="btn btn-danger">Sim, eu tenho certeza.</button>
+        </div>
+        </div>
+    </div>
+    <input type="hidden" name="pkCliente" value="${pkCliente}" />
+    <input type="hidden" name="pkPedido" value="${pkPedido}" />
+    <input type="hidden" name="useCase" value="manterPedido" />
+	<input type="hidden" name="action" value="excluir" />
+	<input type="hidden" name="redirect" value="false" />
+	</form>

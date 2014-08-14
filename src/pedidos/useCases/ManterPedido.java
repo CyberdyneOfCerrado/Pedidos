@@ -42,6 +42,19 @@ public class ManterPedido extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone alterar( DoAction da){
+		ActionDone ad = cp.resgataProdutos(da);
+		
+		//Identificando o pacote
+		ad.setData("pkCliente",da.getData("pkCliente"));
+		ad.setData("pkPedido",da.getData("pkPedido"));
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
 	public ActionDone cadastrar( DoAction da){
 		ActionDone ad = cp.cadastrar(da);
 		cp.atualizarPedido(da);
@@ -55,19 +68,44 @@ public class ManterPedido extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone excluir( DoAction da){
+		ActionDone ad = cp.delete(da);
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setMessage("Cliente excluído com sucesso!");
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
+	public ActionDone removeProduto (DoAction da ){
+		ActionDone ad = new ActionDone();
+		cp.removeProduto(da);
+		//Coletando alguns dados do DoAction
+		
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	}
 	@Override
 	public String[] getActions() {
 		String[] actions ={
 							"listar",
 							"cadastrar",
-							"pedido"
+							"pedido",
+							"excluir",
+							"alterar",
+							"removeProduto"
 						  };
 		return actions;
-	}
+	};
 
 	@Override
 	public String getUserCase() {
 		return "manterPedido";
-	}
-
+	};
 }

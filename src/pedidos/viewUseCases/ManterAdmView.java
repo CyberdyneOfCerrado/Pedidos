@@ -1,19 +1,20 @@
 package pedidos.viewUseCases;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 import biz.source_code.miniTemplator.MiniTemplator;
+import pedidos.model.Adm;
 import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
 
-public class ManterClienteView extends ViewController {
 
-	public ManterClienteView(String sevletContext, String userCase) {
-		super(sevletContext, userCase);
+public class ManterAdmView extends ViewController {
+
+	public ManterAdmView(String sevletContext, String useCase) {
+		super(sevletContext, useCase);
+		// TODO Auto-generated constructor stub
 	}
-	
 	private String cadastrar ( ActionDone ad){
 		String resul = "";
 		if(!ad.isProcessed()){
@@ -33,6 +34,11 @@ public class ManterClienteView extends ViewController {
 		return resul;
 	}
 	
+	private String login( ActionDone ad){
+		MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+		return temp.generateOutput();
+	}
+	
 	private String consultar( ActionDone ad){
 		String resul = "";
 		if(!ad.isProcessed()){
@@ -43,13 +49,11 @@ public class ManterClienteView extends ViewController {
 			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"row.html");
-				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("search");
-				 for(Cliente cliente : arl ){
+				 ArrayList<Adm> arl = (ArrayList<Adm>) ad.getData("search");
+				 for(Adm a : arl ){
 					 
-					 temp.setVariable("pk",cliente.getPk());
-					 temp.setVariable("idade",cliente.getIdade());
-					 temp.setVariable("sexo", cliente.getSexo());
-					 temp.setVariable("nome", cliente.getNome());
+					 temp.setVariable("pk",a.getPk());
+					 temp.setVariable("email",a.getEmail());
 					 
 					 temp.addBlock("table");
 				 }
@@ -63,40 +67,7 @@ public class ManterClienteView extends ViewController {
 		return resul;
 	}
 	
-	private String categoria( ActionDone ad){
-		String resul = "";
-		if(!ad.isProcessed()){
-			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
-			resul = temp.generateOutput();
-		}else{
-			MiniTemplator temp;
-			
-			if(ad.isStatus()){//Mensagem de 'tudo bem'.
-				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"categoriarow.html");
-				 ArrayList<String> arl = (ArrayList<String>) ad.getData("todos");
-				 temp.setVariable("valorPesquisa",(String)ad.getData("valor"));
-				 temp.setVariable("search",(String)ad.getData("search"));
-				 //pedido.pk,cliente.pk,nome,valor
-				 for(String a : arl ){
-					 String [] t = a.split(",");
-					
-					 temp.setVariable("nome",t[2]);
-					 temp.setVariable("valor",t[3]);
-					 temp.setVariable("pkPedido",t[0]);
-					 temp.setVariable("pkCliente",t[1]);
-					 
-					 temp.addBlock("table");
-				 }
-				 
-				 resul = temp.generateOutput();
-			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
-				 resul = temp.generateOutput();
-			}
-		}
-		return resul;
-	}
-    
+	
 	private String listar( ActionDone ad){
 		String resul = "";
 		if(!ad.isProcessed()){
@@ -151,8 +122,7 @@ public class ManterClienteView extends ViewController {
 		if(!ad.isProcessed()){
 			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
 			temp.setVariable("pk",(String) ad.getData("pk"));
-			temp.setVariable("idade",(String) ad.getData("idade"));
-			temp.setVariable("nome",(String) ad.getData("nome"));
+			temp.setVariable("email",(String) ad.getData("email"));
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
@@ -175,6 +145,9 @@ public class ManterClienteView extends ViewController {
 		case "cadastrar":
 			resul = cadastrar(ad);
 			break;
+		case "login":
+			resul = login(ad);
+			break;
 		case "consultar":
 			resul = consultar(ad);
 			break;
@@ -187,11 +160,7 @@ public class ManterClienteView extends ViewController {
 		case "listar":
 			resul = listar(ad);
 			break;
-		case "categoria":
-			resul = categoria(ad);
-			break;
 		}
 		return resul;
 	}
-
 }

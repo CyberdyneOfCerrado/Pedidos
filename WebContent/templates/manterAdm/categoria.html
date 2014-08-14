@@ -28,15 +28,15 @@
         </div>
       </div>
       
-     <!-- Tabela de resultados -->
+    <!-- Tabela de resultados -->
     <div class="panel panel-default">
       <!-- Default panel contents -->
-      <div class="panel-heading">Resultado(s) para <strong>${search}</strong> com pedidos menores iguais a <strong>${valorPesquisa}</strong></div>
+      <div class="panel-heading">Resultados</div>
       <!-- Table -->
       <table class="table">
         <tr>
           <td>Nome</td>
-          <td>Valor Pedido</td>
+          <td>Valor</td>
           <td>
             <strong>Alterar</strong>
           </td>
@@ -44,19 +44,6 @@
             <strong>Excluir</strong>
           </td>
         </tr>
-        <!-- $BeginBlock table -->
-        <tr>
-        	<td>${nome}</td>
-        	<td>${valor}</td>
-        	<td>
-            	<a href="q?useCase=manterPedido&action=alterar&redirect=false&pkPedido=${pkPedido}&pkCliente=${pkCliente}" class="btn btn-primary">Alterar</a>
-          	</td>
-          	<td>
-            	<a href="q?useCase=manterPedido&action=excluir&redirect=true&pkPedido=${pkPedido}&pkCliente=${pkCliente}" class="btn btn-danger">Excluir</a>
-          	</td>
-        </tr>
-        <!-- $EndBlock table -->
       </table>
     </div>
-
     </div>
