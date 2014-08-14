@@ -67,6 +67,40 @@ public class ManterClienteView extends ViewController {
 		}
 		return resul;
 	}
+	
+	private String categoria( ActionDone ad){
+		String resul = "";
+		if(!ad.isProcessed()){
+			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+			
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"categoriarow.html");
+				 ArrayList<String> arl = (ArrayList<String>) ad.getData("todos");
+				 temp.setVariable("valorPesquisa",(String)ad.getData("valor"));
+				 temp.setVariable("search",(String)ad.getData("search"));
+				 //pedido.pk,cliente.pk,nome,valor
+				 for(String a : arl ){
+					 String [] t = a.split(",");
+					
+					 temp.setVariable("nome",t[2]);
+					 temp.setVariable("valor",t[3]);
+					 temp.setVariable("pkPedido",t[0]);
+					 temp.setVariable("pkCliente",t[1]);
+					 
+					 temp.addBlock("table");
+				 }
+				 
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
+	}
     
 	private String listar( ActionDone ad){
 		String resul = "";
@@ -160,6 +194,9 @@ public class ManterClienteView extends ViewController {
 			break;
 		case "listar":
 			resul = listar(ad);
+			break;
+		case "categoria":
+			resul = categoria(ad);
 			break;
 		}
 		return resul;

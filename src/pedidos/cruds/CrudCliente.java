@@ -123,5 +123,22 @@ public class CrudCliente extends CrudController{
 		}
 		ad.setData("todos",arl);
 		return ad;
-	}
+	};
+	
+	public ActionDone categoria ( DoAction da ){
+		ActionDone ad = new ActionDone();
+		String sql = "select pedido.pk,cliente.pk,nome,valor from pedido,cliente where pedido.cliente_id = cliente.pk and pedido.valor <= "+da.getData("valor")+" and cliente.nome = '"+da.getData("search")+"'";
+		
+		ResultSet result = super.runWithResult(sql);
+		ArrayList<String> arl = new ArrayList<>();
+		try {
+			while( result.next()){
+					arl.add(result.getString(1)+","+result.getString(2)+","+result.getString(3)+","+result.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ad.setData("todos",arl);
+		return ad;
+	};
 }

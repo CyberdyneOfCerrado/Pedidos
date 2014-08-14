@@ -1,5 +1,3 @@
-
-
 function cadastrar(pkProduto,pkCliente, preco, idPedido){
 	    	var useCase = 'manterPedido';
 	    	var action  = 'cadastrar';
@@ -9,12 +7,11 @@ function cadastrar(pkProduto,pkCliente, preco, idPedido){
 	    	$("#valor").text(parseInt(temp) + parseInt(preco));
 	    	
 	    	//chamando método:
-	    	enviar(pkProduto,pkCliente,preco);
-	    	
-	    	console.log(pkProduto+"  "+pkCliente);	
+	    	enviar(pkProduto,pkCliente,preco,idPedido);
 	    }
-//<!-- href="q?useCase=manterPedido&action=cadastrar&redirect=false&pkProduto=${pkProduto}&pkCliente=${pkCliente}" -->
+
 function enviar (pkP,pkC,preco,idP){
+	console.log(pkP+" + "+pkC+" + "+preco+" + "+idP);
 	$.post( "q", { useCase: 'manterPedido', 
 				   action: 'cadastrar',
 				   redirect: 'false',
@@ -23,6 +20,6 @@ function enviar (pkP,pkC,preco,idP){
 				   pkCliente: pkC,
 				   preco: preco
 				  }).done(function( data ) {
-	    alert( "Data Loaded: " + data );
+				$("#"+pkP).text('OK');
 	  });
 }

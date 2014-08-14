@@ -1,3 +1,4 @@
+
 package pedidos.useCases;
 
 import pedidos.control.ModelController;
@@ -42,10 +43,9 @@ public class ManterPedido extends ModelController {
 	};
 	
 	public ActionDone cadastrar( DoAction da){
-		ActionDone ad = cpp.cadastrar(da);
+		ActionDone ad = cp.cadastrar(da);
+		cp.atualizarPedido(da);
 		//Coletando alguns dados do DoAction
-		ad.setData("pk",(String) da.getData("pk"));
-		ad.setData("nome", (String) da.getData("nome"));
 		
 		//Identificando o pacote
 		ad.setAction(da.getAction());

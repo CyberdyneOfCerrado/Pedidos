@@ -17,6 +17,7 @@
           <td>
             <strong>Adicionar</strong>
           </td>
+          <td>Status</td>
         </tr>
         
          <!-- $BeginBlock table -->
@@ -27,8 +28,10 @@
         		<!-- href="q?useCase=manterPedido&action=cadastrar&redirect=false&pkProduto=${pkProduto}&pkCliente=${pkCliente}" -->
             	<button  onclick="cadastrar('${pkProduto}','${pkCliente}','${preco}','${idPedido}')" class="btn btn-primary">Add</button>
           	</td>
+          	<td id="${pkProduto}"></td>
         </tr>
         <!-- $EndBlock table -->
       </table>
+      <p></p>
     </div>
     </div>

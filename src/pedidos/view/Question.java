@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Question extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletController sc = new ServletController(getServletContext().getRealPath("/"));
 		PrintWriter out = response.getWriter();

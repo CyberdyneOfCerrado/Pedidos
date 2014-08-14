@@ -49,6 +49,18 @@ public class ManterCliente extends ModelController {
 		return ad;
 	};
 	
+	public ActionDone categoria( DoAction da){
+		ActionDone ad = cc.categoria(da);
+		//Identificando o pacote
+		ad.setData("search",da.getData("search"));
+		ad.setData("valor",da.getData("valor"));
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
+		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
 	public ActionDone alterar( DoAction da){
 		Cliente c = new Cliente();
 		c.biuldObject(da);
@@ -78,6 +90,7 @@ public class ManterCliente extends ModelController {
 							"alterar",
 							"excluir",
 							"consultar",
+							"categoria",
 							"listar"
 						};
 		return temp;
