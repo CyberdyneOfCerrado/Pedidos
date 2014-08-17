@@ -27,7 +27,7 @@ public class ManterAdmView extends ViewController {
 				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
 				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
@@ -36,9 +36,41 @@ public class ManterAdmView extends ViewController {
 	}
 	
 	private String login( ActionDone ad){
-		MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
-		return temp.generateOutput();
+		String resul = "";
+		if(!ad.isProcessed()){
+			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
 	}
+	
+	private String sair( ActionDone ad){
+		String resul = "";
+		if( ad.isProcessed()){
+			MiniTemplator temp;
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
+	};
 	
 	private String consultar( ActionDone ad){
 		String resul = "";
@@ -47,49 +79,14 @@ public class ManterAdmView extends ViewController {
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
-			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"row.html");
 				 ArrayList<Adm> arl = (ArrayList<Adm>) ad.getData("search");
-				 for(Adm a : arl ){
-					 
+				 for(Adm a : arl ){			 
 					 temp.setVariable("pk",a.getPk());
-					 temp.setVariable("email",a.getEmail());
-					 
+					 temp.setVariable("email",a.getEmail());			 
 					 temp.addBlock("table");
 				 }
-				 
-				 resul = temp.generateOutput();
-			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
-				 resul = temp.generateOutput();
-			}
-		}
-		return resul;
-	}
-	
-	
-	private String listar( ActionDone ad){
-		String resul = "";
-		if(!ad.isProcessed()){
-			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
-			resul = temp.generateOutput();
-		}else{
-			MiniTemplator temp;
-			
-			if(ad.isStatus()){//Mensagem de 'tudo bem'.
-				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"listar.html");
-				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("todos");
-				 for(Cliente cliente : arl ){
-					 
-					 temp.setVariable("pk",cliente.getPk());
-					 temp.setVariable("idade",cliente.getIdade());
-					 temp.setVariable("sexo", cliente.getSexo());
-					 temp.setVariable("nome", cliente.getNome());
-					 
-					 temp.addBlock("table");
-				 }
-				 
 				 resul = temp.generateOutput();
 			}else{
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
@@ -98,22 +95,45 @@ public class ManterAdmView extends ViewController {
 		}
 		return resul;
 	};
+	
+	private String listar( ActionDone ad){
+		String resul = "";
+		if(!ad.isProcessed()){
+			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			resul = temp.generateOutput();
+		}else{
+			MiniTemplator temp;
+			if(ad.isStatus()){//Mensagem de 'tudo bem'.
+				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"listar.html");
+				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("todos");
+				 for(Cliente cliente : arl ){
+					 temp.setVariable("pk",cliente.getPk());
+					 temp.setVariable("idade",cliente.getIdade());
+					 temp.setVariable("sexo", cliente.getSexo());
+					 temp.setVariable("nome", cliente.getNome()); 
+					 temp.addBlock("table");
+				 }
+				 resul = temp.generateOutput();
+			}else{
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 resul = temp.generateOutput();
+			}
+		}
+		return resul;
+	};
+	
 	private String excluir( ActionDone ad){
 		String resul = "";
 		if(ad.isProcessed()){
 			MiniTemplator temp;
 			temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
-			
 			temp.setVariable("log",ad.getMessage());
-				
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
-				  
 				 temp.setVariable("pk",(String) ad.getData("pk"));
 				 resul = temp.generateOutput();
-			
 		}
 		return resul;
 	};
@@ -127,7 +147,6 @@ public class ManterAdmView extends ViewController {
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
-			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
 				 temp.setVariable("log",ad.getMessage());
@@ -162,6 +181,9 @@ public class ManterAdmView extends ViewController {
 			break;
 		case "listar":
 			resul = listar(ad);
+			break;
+		case "sair":
+			resul = sair(ad);
 			break;
 		}
 		return resul;

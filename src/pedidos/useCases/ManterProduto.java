@@ -91,8 +91,8 @@ public class ManterProduto extends ModelController {
 	};
 	
 	private boolean validarCampos( DoAction da ){
-		String nome  = da.getData("nome");
-		String preco = da.getData("preco");
+		String nome  = (String) da.getData("nome");
+		String preco = (String) da.getData("preco");
 		if( nome.equals("") || preco.equals("")) return false;
 		return true;
 	};

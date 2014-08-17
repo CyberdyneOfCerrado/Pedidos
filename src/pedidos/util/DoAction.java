@@ -26,8 +26,8 @@ public class DoAction {
 	}
 	
 
-	public String getData(String key){
-		return (String) this.data.get(key);
+	public Object getData(String key){
+		return this.data.get(key);
 	}
 
 	public Hashtable<String,Object> getHashtable() {

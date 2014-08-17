@@ -54,7 +54,7 @@ public class CrudCliente extends CrudController{
 	};
 	
 	public ActionDone delete ( DoAction da ){
-		 String table  = "adm"; 
+		 String table  = "cliente"; 
 		 String pk     = (String )da.getData("pk");
 		 
 		ActionDone ad = new ActionDone();

@@ -128,14 +128,13 @@ public class ManterClienteView extends ViewController {
 		}
 		return resul;
 	};
+	
 	private String excluir( ActionDone ad){
 		String resul = "";
 		if(ad.isProcessed()){
 			MiniTemplator temp;
 			temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
-			
-			temp.setVariable("mensagem",ad.getMessage());
-				
+			temp.setVariable("log",ad.getMessage());
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;

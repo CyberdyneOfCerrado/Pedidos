@@ -12,6 +12,7 @@ import pedidos.viewUseCases.ManterAdmView;
 import pedidos.viewUseCases.ManterClienteView;
 import pedidos.viewUseCases.ManterPedidoView;
 import pedidos.viewUseCases.ManterProdutoView;
+import pedidos.viewUseCases.SecurityView;
 import biz.source_code.miniTemplator.MiniTemplator;
 import biz.source_code.miniTemplator.MiniTemplator.TemplateSyntaxException;
 
@@ -36,6 +37,7 @@ public class ServletController {
 		listViews.put("manterProduto", new ManterProdutoView(servletContext,"manterProduto"));
 		listViews.put("manterPedido", new ManterPedidoView(servletContext,"manterPedido"));
 		listViews.put("manterAdm", new ManterAdmView(servletContext,"manterAdm"));
+		listViews.put("security", new SecurityView(servletContext,"security"));
 	};
 	
 	private String init() throws TemplateSyntaxException, IOException{
@@ -68,8 +70,17 @@ public class ServletController {
 		//1 pegando o nome do caso de uso e a respectiva ação.
 		String useCase = request.getParameter("useCase");
 		String action   = request.getParameter("action");
+		String security = (String) request.getAttribute("security");
+		DoAction da;
 		
-		DoAction da = new DoAction(useCase,action);
+		//Casou houver alguma restrição de segurança
+		if(security.equals("true")){
+			da = new DoAction("security","acessBlock");
+			da.setData("redirect","true");
+			return da;
+		}
+				
+		da = new DoAction(useCase,action);
 		
 		//Pegando todos os parâmetros adicionados, exceto pelo userCase e action;
 		Enumeration<String> valuesName = request.getParameterNames();
@@ -82,6 +93,7 @@ public class ServletController {
 		}
 		//Pegando dados de Sessão
 		da.setData("Session", request.getSession());
+		
 		return da;
 	};
 	

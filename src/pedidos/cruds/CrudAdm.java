@@ -87,4 +87,23 @@ public class CrudAdm extends CrudController {
 		ad.setData("search",arl);
 		return ad;
 	}
+	
+	public ActionDone verificarLogin( DoAction da ){
+		ActionDone ad = new ActionDone();
+		String sql = "select * from adm where ";
+		sql += "email = '"+da.getData("email")+"' and ";
+		sql += "senha = '"+da.getData("senha")+"'";
+		
+		ResultSet result = super.runWithResult(sql);
+		boolean exist = false;
+		
+		try {
+			while(result.next()) exist = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ad.setData("exist",exist);
+		return ad;
+	}
 }

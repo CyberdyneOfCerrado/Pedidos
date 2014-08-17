@@ -97,9 +97,9 @@ public class ManterCliente extends ModelController {
 	};
 	
 	private boolean validarCampos( DoAction da ){
-		String nome = da.getData("nome");
-		String idade = da.getData("idade");
-		String sexo = da.getData("sexo");
+		String nome = (String) da.getData("nome");
+		String idade = (String) da.getData("idade");
+		String sexo = (String) da.getData("sexo");
 		if( nome.equals("") || idade.equals("") || sexo.equals("") )return false;
 		return true;
 	}

@@ -12,7 +12,6 @@ public class ManterPedidoView extends ViewController {
 
 	public ManterPedidoView(String sevletContext, String useCase) {
 		super(sevletContext, useCase);
-		// TODO Auto-generated constructor stub
 	};
 
 	private String listar ( ActionDone ad){
@@ -102,14 +101,11 @@ public class ManterPedidoView extends ViewController {
 		if(ad.isProcessed()){
 			MiniTemplator temp;
 			temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
-			
-			temp.setVariable("mensagem",ad.getMessage());
-				
+			temp.setVariable("log",ad.getMessage());
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
-				  
 				 temp.setVariable("pkPedido",(String) ad.getData("pkPedido"));
 				 temp.setVariable("pkCliente",(String) ad.getData("pkCliente"));
 				 resul = temp.generateOutput();
@@ -135,5 +131,5 @@ public class ManterPedidoView extends ViewController {
 			break;
 		}
 		return resul;
-	}
+	};
 }

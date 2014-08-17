@@ -110,7 +110,7 @@ public class CrudPedido extends CrudController {
 			e.printStackTrace();
 		}
 		
-		int temp = Integer.parseInt(da.getData("preco"));
+		int temp = Integer.parseInt((String) da.getData("preco"));
 		valor += temp;
 		sql = "update pedido set valor = "+ valor+" where pk = "+da.getData("idPedido");
 		if(super.run(sql)){
@@ -122,7 +122,7 @@ public class CrudPedido extends CrudController {
 	};
 
 	public ActionDone delete(DoAction da) {
-		String pkPedido = da.getData("pkPedido");
+		String pkPedido = (String) da.getData("pkPedido");
 		String sql = "select pk from pedido_produto where pedido_id = "+pkPedido;
 		ArrayList<String> keys = new ArrayList<>();
 		

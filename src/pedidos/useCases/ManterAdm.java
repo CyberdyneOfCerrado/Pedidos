@@ -1,5 +1,7 @@
 package pedidos.useCases;
 
+import javax.servlet.http.HttpSession;
+
 import pedidos.control.ModelController;
 import pedidos.cruds.CrudAdm;
 import pedidos.model.Adm;
@@ -79,13 +81,41 @@ public class ManterAdm extends ModelController {
 	};
 	
 	public ActionDone login ( DoAction da){
-		
-		
-		ActionDone ad = ca.update(da);
+		ActionDone ad = ca.verificarLogin(da);
+		String exist = String.valueOf(ad.getData("exist"));
+		if(exist.equals("true")){
+			HttpSession session = (HttpSession) da.getData("Session");
+			session.setAttribute("login","true");
+			ad.setMessage("Você está logado.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
+		ad.setProcessed(true);
+		return ad;
+	};
+	
+	public ActionDone sair( DoAction da){
+		ActionDone ad = new ActionDone();
+		
+		HttpSession session = (HttpSession) da.getData("Session");
+		String exist = (String) session.getAttribute("login");
+		
+		if( exist == null || exist.equals("false") ){
+			ad.setMessage("Você não está logado.");
+			ad.setStatus(false);
+		}else{
+			session.setAttribute("login","false");
+			ad.setMessage("Você foi deslogado com sucesso.");
+			ad.setStatus(true);
+		}
+		//Identificando o pacote
+		ad.setAction(da.getAction());
+		ad.setUseCase(da.getUseCase());
 		ad.setProcessed(true);
 		return ad;
 	};
@@ -109,18 +139,11 @@ public class ManterAdm extends ModelController {
 	}
 
 	public boolean validarCampos( DoAction da ){
-		String email = da.getData("email");
-		String senha = da.getData("senha");
-		String senhaConfir = da.getData("senhaConfir");
-		
-		if( email.equals("") || senha.equals("") || senhaConfir.equals("")){
-			return false;
-		}
-		
-		if( !senha.equals(senhaConfir)){
-			return false;
-		}
-		
+		String email = (String) da.getData("email");
+		String senha = (String) da.getData("senha");
+		String senhaConfir = (String) da.getData("senhaConfir");
+		if( email.equals("") || senha.equals("") || senhaConfir.equals(""))return false;
+		if( !senha.equals(senhaConfir))return false;
 		return true;
 	}
 }

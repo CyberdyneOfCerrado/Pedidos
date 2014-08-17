@@ -65,7 +65,7 @@ public class ManterProdutoView extends ViewController{
 		if(ad.isProcessed()){
 			MiniTemplator temp;
 			temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
-			temp.setVariable("mensagem",ad.getMessage());
+			temp.setVariable("log",ad.getMessage());
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
