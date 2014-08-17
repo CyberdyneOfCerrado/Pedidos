@@ -24,9 +24,11 @@ public class ManterClienteView extends ViewController {
 			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
 		}
@@ -56,7 +58,7 @@ public class ManterClienteView extends ViewController {
 				 
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
 				 resul = temp.generateOutput();
 			}
 		}
@@ -90,7 +92,7 @@ public class ManterClienteView extends ViewController {
 				 
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
 				 resul = temp.generateOutput();
 			}
 		}
@@ -120,7 +122,7 @@ public class ManterClienteView extends ViewController {
 				 
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
 				 resul = temp.generateOutput();
 			}
 		}
@@ -159,9 +161,11 @@ public class ManterClienteView extends ViewController {
 			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
 		}

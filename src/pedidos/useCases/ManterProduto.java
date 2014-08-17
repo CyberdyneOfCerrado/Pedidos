@@ -17,14 +17,18 @@ public class ManterProduto extends ModelController {
 	public ActionDone cadastrar( DoAction da){
 		Produto p = new Produto();
 		p.biuldObject(da);
-		
-		ActionDone ad = cp.save(p);
-		
+		ActionDone ad = new ActionDone();
+		if(validarCampos(da)){
+			ad = cp.save(p);
+			ad.setMessage("Cadastrado com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
-		ad.setMessage("Você foi cadastrado com sucesso.");
 		return ad;
 	};
 	
@@ -41,11 +45,20 @@ public class ManterProduto extends ModelController {
 	public ActionDone alterar( DoAction da){
 		Produto p = new Produto();
 		p.biuldObject(da);
-		ActionDone ad = cp.update(p);
+		
+		ActionDone ad = new ActionDone();
+		if(validarCampos(da)){
+			ad = cp.update(p);
+			ad.setMessage("Dados alterados com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
+		
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
 		return ad;
 	};
@@ -60,6 +73,7 @@ public class ManterProduto extends ModelController {
 		ad.setProcessed(true);
 		return ad;
 	};
+	
 	@Override
 	public String[] getActions() {
 		String[] actions ={
@@ -69,11 +83,17 @@ public class ManterProduto extends ModelController {
 							"consultar"
 						  };
 		return actions;
-	}
+	};
 
 	@Override
 	public String getUserCase() {
 		return "manterProduto";
-	}
-
+	};
+	
+	private boolean validarCampos( DoAction da ){
+		String nome  = da.getData("nome");
+		String preco = da.getData("preco");
+		if( nome.equals("") || preco.equals("")) return false;
+		return true;
+	};
 }

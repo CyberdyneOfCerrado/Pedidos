@@ -16,15 +16,21 @@ public class ManterCliente extends ModelController {
 	public ActionDone cadastrar( DoAction da){
 		Cliente c = new Cliente();
 		c.biuldObject(da);
+		ActionDone ad = new ActionDone();
 		
-		ActionDone ad = cc.save(c);
+		if(validarCampos(da)){
+			ad = cc.save(c);
+			ad.setMessage("Cadastrado com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
 		
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
-		ad.setMessage("Você foi cadastrado com sucesso.");
 		return ad;
 	};
 	
@@ -64,11 +70,18 @@ public class ManterCliente extends ModelController {
 	public ActionDone alterar( DoAction da){
 		Cliente c = new Cliente();
 		c.biuldObject(da);
-		ActionDone ad = cc.update(c);
+		ActionDone ad = new ActionDone();
+		if(validarCampos(da)){
+			ad = cc.update(c);
+			ad.setMessage("Dados alterados com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
 		return ad;
 	};
@@ -82,6 +95,14 @@ public class ManterCliente extends ModelController {
 		ad.setProcessed(true);
 		return ad;
 	};
+	
+	private boolean validarCampos( DoAction da ){
+		String nome = da.getData("nome");
+		String idade = da.getData("idade");
+		String sexo = da.getData("sexo");
+		if( nome.equals("") || idade.equals("") || sexo.equals("") )return false;
+		return true;
+	}
 	
 	@Override
 	public String[] getActions() {

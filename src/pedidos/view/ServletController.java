@@ -80,6 +80,8 @@ public class ServletController {
 				da.setData(temp,request.getParameter(temp));
 			}
 		}
+		//Pegando dados de Sessão
+		da.setData("Session", request.getSession());
 		return da;
 	};
 	

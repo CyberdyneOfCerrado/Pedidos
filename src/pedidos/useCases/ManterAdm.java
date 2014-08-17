@@ -18,15 +18,21 @@ public class ManterAdm extends ModelController {
 	public ActionDone cadastrar( DoAction da){
 		Adm a = new Adm();
 		a.biuldObject(da);
+		ActionDone ad = new ActionDone();
 		
-		ActionDone ad = ca.save(a);
+		if(validarCampos(da)){
+			ad = ca.save(a);
+			ad.setMessage("Cadastrado com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
 		
 		//Identificando o pacote
 		ad.setAction(da.getAction());
-		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
-		ad.setMessage("Você foi cadastrado com sucesso.");
+		ad.setUseCase(da.getUseCase());
 		return ad;
 	};
 	
@@ -54,12 +60,20 @@ public class ManterAdm extends ModelController {
 	public ActionDone alterar( DoAction da){
 		Adm a = new Adm();
 		a.biuldObject(da);
+		ActionDone ad = new ActionDone();
 		
-		ActionDone ad = ca.update(a);
+		if(validarCampos(da)){
+			ad = ca.update(a);
+			ad.setMessage("Dados alterados com sucesso.");
+			ad.setStatus(true);
+		}else{
+			ad.setMessage("Dados inválidos.");
+			ad.setStatus(false);
+		}
+		
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
-		ad.setStatus(true);
 		ad.setProcessed(true);
 		return ad;
 	};
@@ -67,7 +81,7 @@ public class ManterAdm extends ModelController {
 	public ActionDone login ( DoAction da){
 		
 		
-		ActionDone ad = ca.update(a);
+		ActionDone ad = ca.update(da);
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
@@ -94,4 +108,19 @@ public class ManterAdm extends ModelController {
 		return "manterAdm";
 	}
 
+	public boolean validarCampos( DoAction da ){
+		String email = da.getData("email");
+		String senha = da.getData("senha");
+		String senhaConfir = da.getData("senhaConfir");
+		
+		if( email.equals("") || senha.equals("") || senhaConfir.equals("")){
+			return false;
+		}
+		
+		if( !senha.equals(senhaConfir)){
+			return false;
+		}
+		
+		return true;
+	}
 }

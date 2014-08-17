@@ -7,7 +7,9 @@ public class Converter {
 	 
 	 switch( type ){
 		 case "int": 
-			  o = Integer.parseInt((String) temp );
+			  String number = (String) temp;
+			  if(number.equals(""))return new Integer("0");
+			  o = Integer.parseInt(number);
 		 break;
 		 case "String":
 			 o = (String) temp ;

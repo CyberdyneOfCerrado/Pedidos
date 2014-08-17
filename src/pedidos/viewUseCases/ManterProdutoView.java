@@ -23,14 +23,16 @@ public class ManterProdutoView extends ViewController{
 			
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
 		}
 		return resul;
-	}
+	};
 	
 	private String consultar( ActionDone ad){
 		String resul = "";
@@ -51,7 +53,7 @@ public class ManterProdutoView extends ViewController{
 				 }
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
 				 resul = temp.generateOutput();
 			}
 		}
@@ -86,9 +88,11 @@ public class ManterProdutoView extends ViewController{
 			MiniTemplator temp;
 			if(ad.isStatus()){//Mensagem de 'tudo bem'.
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"success.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
+				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
 		}
@@ -113,6 +117,5 @@ public class ManterProdutoView extends ViewController{
 			break;
 		}
 		return resul;
-	}
-
+	};
 }
