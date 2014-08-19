@@ -23,7 +23,7 @@ public class Security {
 	
 	public boolean permissao( String login , String useCase , String action){
 		boolean blackList = false;
-		
+		if(useCase==null || action == null)return true;
 		String[] actions = acess.get(useCase);
 		if(actions == null ) return true;
 		
