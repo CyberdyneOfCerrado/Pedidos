@@ -4,14 +4,39 @@
       <h2>Consulta Cliente por Pedidos</h2>
       <div class="row">
         <div class="col-md-12">
-          <form class="navbar-form navbar-left" role="search" method="get" action="q">
-          	  <input type="hidden" name="useCase" value="manterCliente" />
+          <!--  new Form -->
+    <form class="form-horizontal" role="form" method="post" action="q">
+         <input type="hidden" name="useCase" value="manterCliente" />
 	          <input type="hidden" name="action" value="categoria" />
 	          <input type="hidden" name="redirect" value="false" />
-            <div class="form-group">
-              <input type="text" class="form-control" name="search" placeholder="Nome">
+          
+          <div class="form-group">
+            <label for="nome" class="col-sm-2 control-label">Cliente</label>
+            <div class="col-sm-10">
+              <div class="col-xs-8">
+              <input type="text" class="form-control" id="nome" name="search" placeholder="Nome">
             </div>
-            <select class="form-control" id="valor" name="valor">
+            </div>
+          </div>
+                     
+          <div class="form-group">
+            <label for="pagamento" class="col-sm-2 control-label">Tipo de pagamento</label>
+            <div class="col-sm-10">
+              <div class="col-xs-2">
+              <select class="form-control" id="pagamento" name="pagamento">
+                 <!-- $BeginBlock tablePagamento -->
+                  <option value="${pkPagamento}">${descricao}</option>
+              	<!-- $EndBlock tablePagamento  -->
+               </select>
+             </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="valor" class="col-sm-2 control-label">Pedidos menores igual</label>
+            <div class="col-sm-10">
+              <div class="col-xs-2">
+              <select class="form-control" id="valor" name="valor">
                   <option>50</option>
                   <option>100</option>
                   <option>200</option>
@@ -21,15 +46,19 @@
                   <option>1000</option>
                   <option>10000</option>
                   <option>1000000</option>
-            </select>
-             <br>
-            <select class="form-control" id="pagamento" name="pagamento">
-              <!-- $BeginBlock tablePagamento -->
-                  <option value="${pkPagamento}">${descricao}</option>
-              <!-- $EndBlock tablePagamento  -->
-            </select>
-            <button type="submit" class="btn btn-default">Consultar</button>
-          </form><br></br>             
+               </select>
+             </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="col-xs-2">
+              <button type="submit" class="btn btn-default">Consultar</button>
+            </div>
+            </div>
+          </div>
+        </form>       
         </div>
       </div>
       

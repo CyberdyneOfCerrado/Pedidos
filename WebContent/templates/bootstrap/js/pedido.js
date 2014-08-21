@@ -7,7 +7,8 @@ function cadastrar(pkProduto,pkCliente, preco, idPedido){
 	    }
 
 function remover(pkProduto,pkCliente, preco, idPedido){
-	enviarRemover(pkProduto,pkCliente,preco,idPedido);
+	var resul = confirm("Deseja realmente remover esse pedido?");
+	if(resul) enviarRemover(pkProduto,pkCliente,preco,idPedido);
 }
 
 function atualizar(idP){
@@ -16,17 +17,20 @@ function atualizar(idP){
 
 
 function enviarRemover (pkP,pkC,preco,idP){
+	
 	console.log(pkP+" + "+pkC+" + "+preco+" + "+idP);
+	
 	$.post( "q", { useCase: 'manterPedido', 
-				   action: 'removeProduto',
-				   redirect: 'false',
-				   pkProduto: pkP,
-				   idPedido: idP,
-				   pkCliente: pkC,
-				   preco: preco
-				  }).done(function( data ) {
-				$("#"+pkP).remove();
-	  });
+				 action: 'removeProduto',
+				 redirect: 'false',
+				 pkProduto: pkP,
+				 idPedido: idP,
+				 pkCliente: pkC,
+				 preco: preco
+			 }).done(function( data ) {
+		$("#"+pkP).remove();
+	});
+	
 }
 function formaPagamento(idP){
 	//Pegar o que está selecionado
@@ -39,8 +43,8 @@ function formaPagamento(idP){
 		   idPedido: idP,
 		   idPagam : temp
 		  }).done(function( data ) {
-			  alert("Mudanca feita com sucesso!");
-});
+			  alert("Mudança feita com sucesso!");
+		  });
 }
 
 function enviar (pkP,pkC,preco,idP){
@@ -53,6 +57,6 @@ function enviar (pkP,pkC,preco,idP){
 				   pkCliente: pkC,
 				   preco: preco
 				  }).done(function( data ) {
-				$("#"+pkP).text('OK');
+				$("#"+pkP).text('Adicionado');
 	  });
 }
