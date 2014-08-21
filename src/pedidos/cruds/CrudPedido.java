@@ -69,7 +69,7 @@ public class CrudPedido extends CrudController {
 	
 	public String criarPedido(DoAction da) {
 
-		String sql = "insert into pedido (valor,cliente_id) values (0,"+da.getData("pk")+")";
+		String sql = "insert into pedido (valor,cliente_id,pagamento_id) values (0,"+da.getData("pk")+",1)";
 		super.run(sql);
 		
 		ResultSet result = super.runWithResult("select pk from pedido where pk = (select max(pk) from pedido )");
@@ -179,6 +179,19 @@ public class CrudPedido extends CrudController {
 			ad.setMessage("Ocorreu algum erro.");
 		}
 		return ad;
-		
 	};
+	
+	public ActionDone atualizaPagamento(DoAction da) {
+		String table  = "pedido"; 
+		ActionDone ad = new ActionDone();
+		String sql ="update pedido set pagamento_id = "+ da.getData("idPagam")+" where pk = "+da.getData("idPedido");
+		
+		if(super.run(sql)){
+			ad.setMessage("Os Dados foram adicionados com sucesso");
+		}else{
+			ad.setMessage("Ocorreu algum erro.");
+		}
+		return ad;
+	};
+	
 }

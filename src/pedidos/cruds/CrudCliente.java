@@ -82,7 +82,7 @@ public class CrudCliente extends CrudController{
 		
 		
 		if(!isNumber){
-			sql += "nome =  "+ "'"+search+"'";
+			sql += "nome ~*  "+ "'"+search+"'";
 		}else{
 			sql += "idade = " +value;
 		}
@@ -127,7 +127,7 @@ public class CrudCliente extends CrudController{
 	
 	public ActionDone categoria ( DoAction da ){
 		ActionDone ad = new ActionDone();
-		String sql = "select pedido.pk,cliente.pk,nome,valor from pedido,cliente where pedido.cliente_id = cliente.pk and pedido.valor <= "+da.getData("valor")+" and cliente.nome = '"+da.getData("search")+"'";
+		String sql = "select pedido.pk,cliente.pk,nome,valor from pedido,cliente where pedido.pagamento_id = "+ da.getData("pagamento")+" and pedido.cliente_id = cliente.pk and pedido.valor <= "+da.getData("valor")+" and cliente.nome ~* '"+da.getData("search")+"'";
 		
 		ResultSet result = super.runWithResult(sql);
 		ArrayList<String> arl = new ArrayList<>();

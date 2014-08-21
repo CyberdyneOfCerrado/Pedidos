@@ -5,6 +5,7 @@ import java.util.Enumeration;
 
 import biz.source_code.miniTemplator.MiniTemplator;
 import pedidos.model.Cliente;
+import pedidos.model.Pagamento;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
 
@@ -69,6 +70,13 @@ public class ManterClienteView extends ViewController {
 		String resul = "";
 		if(!ad.isProcessed()){
 			MiniTemplator temp = super.startMiniTemplator(super.getTemplate(ad));
+			ArrayList<Pagamento> arlp = (ArrayList<Pagamento>) ad.getData("pagamento");
+			 
+			 for( Pagamento pagamento : arlp ){
+				 temp.setVariable("pkPagamento", String.valueOf(pagamento.getPk()));
+				 temp.setVariable("descricao", pagamento.getDescricao());
+				 temp.addBlock("tablePagamento");
+			 }
 			resul = temp.generateOutput();
 		}else{
 			MiniTemplator temp;
@@ -88,6 +96,14 @@ public class ManterClienteView extends ViewController {
 					 temp.setVariable("pkCliente",t[1]);
 					 
 					 temp.addBlock("table");
+				 }
+				 
+				 ArrayList<Pagamento> arlp = (ArrayList<Pagamento>) ad.getData("pagamento");
+				 
+				 for( Pagamento pagamento : arlp ){
+					 temp.setVariable("pkPagamento", String.valueOf(pagamento.getPk()));
+					 temp.setVariable("descricao", pagamento.getDescricao());
+					 temp.addBlock("tablePagamento");
 				 }
 				 
 				 resul = temp.generateOutput();

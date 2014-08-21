@@ -9,9 +9,9 @@
 	          <input type="hidden" name="action" value="categoria" />
 	          <input type="hidden" name="redirect" value="false" />
             <div class="form-group">
-              <input type="text" class="form-control" name="search" placeholder="Nome, idade">
+            <input type="text" class="form-control" name="search" placeholder="Nome">
             </div>
-            <select class="form-control" id="sex" name="valor">
+            <select class="form-control" id="valor" name="valor">
                   <option>50</option>
                   <option>100</option>
                   <option>200</option>
@@ -22,7 +22,12 @@
                   <option>10000</option>
                   <option>1000000</option>
             </select>
-            
+            <br>
+            <select class="form-control" id="pagamento" name="pagamento">
+                  <!-- $BeginBlock tablePagamento -->
+                  <option value="${pkPagamento}">${descricao}</option>
+              <!-- $EndBlock tablePagamento  -->
+            </select>
             <button type="submit" class="btn btn-default">Consultar</button>
           </form><br></br>             
         </div>

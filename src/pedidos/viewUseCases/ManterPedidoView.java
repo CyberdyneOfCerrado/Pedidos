@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import biz.source_code.miniTemplator.MiniTemplator;
 import pedidos.model.Cliente;
+import pedidos.model.Pagamento;
 import pedidos.model.Produto;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
@@ -59,6 +60,15 @@ public class ManterPedidoView extends ViewController {
 					 temp.setVariable("preco", produto.getPreco());
 					 temp.addBlock("table");
 				 }
+				 
+				 ArrayList<Pagamento> arlp = (ArrayList<Pagamento>) ad.getData("pagamento");
+				 
+				 for( Pagamento pagamento : arlp ){
+					 temp.setVariable("pkPagamento", String.valueOf(pagamento.getPk()));
+					 temp.setVariable("descricao", pagamento.getDescricao());
+					 temp.addBlock("tablePagamento");
+				 }
+				 
 				 resul = temp.generateOutput();
 			}else{
 				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"error.html");

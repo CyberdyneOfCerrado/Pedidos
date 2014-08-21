@@ -9,6 +9,22 @@
     <div class="panel panel-default" >
       <!-- Default panel contents -->
       <div class="panel-heading">Produtos disponíveis</div>
+      
+      <div class="form-group">
+            <label for="sex" class="col-sm-2 control-label">Tipo de pagamento</label>
+            <div class="col-sm-10">
+              <div class="col-xs-2">
+              <select class="form-control" id="pagamento">
+              <!-- $BeginBlock tablePagamento -->
+                  <option value="${pkPagamento}">${descricao}</option>
+              <!-- $EndBlock tablePagamento  -->
+               </select>
+             </div>
+             <button onclick="atualizar('${idPedido}')" class="btn btn-success" >Salvar</button>
+            </div>
+          </div>
+          
+          
       <!-- Table -->
       <table class="table">
         <tr>

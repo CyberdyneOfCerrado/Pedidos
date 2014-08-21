@@ -83,7 +83,7 @@ public class CrudProduto extends CrudController {
 		
 		
 		if(!isNumber){
-			sql += "nome =  "+ "'"+search+"'";
+			sql += "nome ~*  "+ "'"+search+"'";
 		}else{
 			sql += "preco = " +value;
 		}
@@ -120,10 +120,5 @@ public class CrudProduto extends CrudController {
 		}
 		ad.setData("todos",arl);
 		return ad;
-	}
-
-	public ActionDone cadastrar(DoAction da) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	};
 }

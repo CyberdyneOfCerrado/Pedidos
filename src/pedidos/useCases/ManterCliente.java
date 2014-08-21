@@ -1,16 +1,22 @@
 package pedidos.useCases;
 
+import java.util.ArrayList;
+
 import pedidos.control.ModelController;
 import pedidos.cruds.CrudCliente;
+import pedidos.cruds.CrudPagamento;
 import pedidos.model.Cliente;
+import pedidos.model.Pagamento;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
 public class ManterCliente extends ModelController {
 	private CrudCliente cc;
+	private CrudPagamento cPag;
 	
 	public ManterCliente(){
 		this.cc = new CrudCliente();
+		this.cPag = new CrudPagamento();
 	};
 	
 	public ActionDone cadastrar( DoAction da){
@@ -56,14 +62,27 @@ public class ManterCliente extends ModelController {
 	};
 	
 	public ActionDone categoria( DoAction da){
-		ActionDone ad = cc.categoria(da);
+		ActionDone ad = new ActionDone();
+		if( da.getData("getPagam") != null){
+			ActionDone temp = cPag.selectAll();
+			ArrayList<Pagamento> arl = (ArrayList<Pagamento>) temp.getData("pagamento");
+			ad.setData("pagamento", arl);
+			ad.setProcessed(false);
+		}else{
+			ad = cc.categoria(da);
+			ActionDone temp = cPag.selectAll();
+			ArrayList<Pagamento> arl = (ArrayList<Pagamento>) temp.getData("pagamento");
+			ad.setData("pagamento", arl);
+			ad.setData("search",da.getData("search"));
+			ad.setData("valor",da.getData("valor"));
+			ad.setProcessed(true);
+		}
+		 
 		//Identificando o pacote
-		ad.setData("search",da.getData("search"));
-		ad.setData("valor",da.getData("valor"));
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
 		ad.setStatus(true);
-		ad.setProcessed(true);
+		
 		return ad;
 	};
 	
