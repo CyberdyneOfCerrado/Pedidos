@@ -8,7 +8,11 @@ import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.view.ViewController;
 
-
+//Classe que mantém as visões do caso de uso adm.
+//Cada método dessa classe representa a visão de um cenário.
+//Há duas formas de cada método funcionar; com base no ActionDone processado ou não.
+//Quando o ActionDone não foi processado, logo é uma ação de redirecionamento, caso contrário,
+//o método cria a visão de resposta a um ActionDone processado.
 public class ManterAdmView extends ViewController {
 
 	public ManterAdmView(String sevletContext, String useCase) {

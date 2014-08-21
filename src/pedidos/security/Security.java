@@ -7,7 +7,7 @@ public class Security {
 	
 	public Security(){
 		acess = new Hashtable<>();
-		//Adicioar apenas as ações que será restritas a conta de Adm.
+		//Adicinar apenas as ações que será restritas a conta de Adm.
 		
 		String []manterAdm = {"excluir","alterar","cadastrar"};
 		String []manterCliente = {"excluir","listar"};
@@ -20,6 +20,8 @@ public class Security {
 		acess.put("manterCliente",manterCliente);
 	}
 	
+	//Com base na ação e caso de uso e o tipo de usuário, esse método diz se a ação e permitida
+	//ou não.
 	public boolean permissao( String login , String useCase , String action){
 		boolean blackList = false;
 		if(useCase==null || action == null)return true;

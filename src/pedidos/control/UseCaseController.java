@@ -10,7 +10,7 @@ import pedidos.useCases.ManterProduto;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
-
+//Esta classe procura pela classe de UseCase mais adequada para atuar na requisição
 public class UseCaseController {
 	Hashtable<String,ModelController> listUserCase;
 	

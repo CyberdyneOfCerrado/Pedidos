@@ -26,7 +26,7 @@ public class Filtro implements Filter {
 	  public void destroy() {
 	    this.filterConfig = null;
 	  }
-	
+	//Captura o request afim de procurar ações que são restritas a administradores.
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		Security security = new Security();
 		HttpServletRequest re = (HttpServletRequest) request;

@@ -64,7 +64,7 @@ public class ManterClienteView extends ViewController {
 			}
 		}
 		return resul;
-	}
+	};
 	
 	private String categoria( ActionDone ad){
 		String resul = "";
@@ -113,7 +113,7 @@ public class ManterClienteView extends ViewController {
 			}
 		}
 		return resul;
-	}
+	};
     
 	private String listar( ActionDone ad){
 		String resul = "";
@@ -155,10 +155,8 @@ public class ManterClienteView extends ViewController {
 		}else{
 			MiniTemplator temp;
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
-				  
 				 temp.setVariable("pk",(String) ad.getData("pk"));
 				 resul = temp.generateOutput();
-			
 		}
 		return resul;
 	};
@@ -211,6 +209,5 @@ public class ManterClienteView extends ViewController {
 			break;
 		}
 		return resul;
-	}
-
+	};
 }

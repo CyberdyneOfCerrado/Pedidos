@@ -8,7 +8,7 @@ import pedidos.model.Adm;
 import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
-
+//Classe que mantem um Adm no sistema, seus métodos são cenários.
 public class ManterAdm extends ModelController {
 	private CrudAdm ca;
 	

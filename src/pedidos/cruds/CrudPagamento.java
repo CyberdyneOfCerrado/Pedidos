@@ -8,7 +8,7 @@ import pedidos.control.CrudController;
 import pedidos.model.Cliente;
 import pedidos.model.Pagamento;
 import pedidos.util.ActionDone;
-
+//Classe que gerencia o crud do modelo  Pagamento
 public class CrudPagamento extends CrudController {
 	
 	public CrudPagamento(){

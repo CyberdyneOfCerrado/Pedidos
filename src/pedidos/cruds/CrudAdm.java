@@ -9,7 +9,7 @@ import pedidos.model.Adm;
 import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
-
+//Classe que gerencia o crud do modelo ADM
 public class CrudAdm extends CrudController {
 
 	public ActionDone update ( Adm adm ){

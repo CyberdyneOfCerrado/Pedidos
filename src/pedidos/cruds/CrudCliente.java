@@ -8,7 +8,7 @@ import pedidos.control.CrudController;
 import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
-
+//Classe que gerencia o curd do modelo Cliente
 public class CrudCliente extends CrudController{
 	
 	public CrudCliente(){

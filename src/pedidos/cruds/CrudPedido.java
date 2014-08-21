@@ -9,7 +9,7 @@ import pedidos.model.Cliente;
 import pedidos.model.Produto;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
-
+//Classe que gerencia o crud do modelo pedido.
 public class CrudPedido extends CrudController {
 	public CrudPedido(){
 		super();
