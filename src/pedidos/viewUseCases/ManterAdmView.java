@@ -112,9 +112,7 @@ public class ManterAdmView extends ViewController {
 				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("todos");
 				 for(Cliente cliente : arl ){
 					 temp.setVariable("pk",cliente.getPk());
-					 temp.setVariable("idade",cliente.getIdade());
-					 temp.setVariable("sexo", cliente.getSexo());
-					 temp.setVariable("nome", cliente.getNome()); 
+					 temp.setVariable("email",cliente.getIdade()); 
 					 temp.addBlock("table");
 				 }
 				 resul = temp.generateOutput();

@@ -70,7 +70,7 @@ public class CrudAdm extends CrudController {
 		String sql = "select * from adm where ";
 		String search = (String) da.getData("search");
 		
-		sql += "email =  "+ "'"+search+"'";
+		sql += "email ~*  "+ "'"+search+"'";
 		
 		ResultSet result = super.runWithResult(sql);
 		

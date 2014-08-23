@@ -1,7 +1,7 @@
      
     <!--Container principal -->
     <div class="container">
-    <h1>Consultar Cliente</h1>
+    <h1>Consultar Adm</h1>
     
     <!-- Tabela de resultados -->
     <div class="panel panel-default">
@@ -10,9 +10,7 @@
       <!-- Table -->
       <table class="table">
         <tr>
-          <td>Nome</td>
-          <td>Idade</td>
-          <td>Sexo </td>
+          <td>Email</td>
           <td>
             <strong>Alterar</strong>
           </td>
@@ -22,14 +20,12 @@
         </tr>
         <!-- $BeginBlock table -->
         <tr>
-        	<td>${nome}</td>
-        	<td>${idade}</td>
-        	<td>${sexo}</td>
+        	<td>${email}</td>
         	<td>
-            	<a href="q?useCase=manterCliente&action=alterar&redirect=true&pk=${pk}&nome=${nome}&idade=${idade}&sexo=${sexo}" class="btn btn-primary">Alterar</a>
+            	<a href="q?useCase=manterAdm&action=alterar&redirect=true&pk=${pk}&email=${email}" class="btn btn-primary">Alterar</a>
           	</td>
           	<td>
-            	<a href="q?useCase=manterCliente&action=excluir&redirect=true&pk=${pk}" class="btn btn-danger">Excluir</a>
+            	<a href="q?useCase=manterAdm&action=excluir&redirect=true&pk=${pk}" class="btn btn-danger">Excluir</a>
           	</td>
         </tr>
         <!-- $EndBlock table -->

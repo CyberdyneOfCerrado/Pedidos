@@ -40,6 +40,11 @@ public class ManterAdm extends ModelController {
 	
 	public ActionDone excluir( DoAction da){
 		ActionDone ad = ca.delete(da);
+		HttpSession s = (HttpSession) da.getData("Session");
+		
+		//Matando a sessão do usuário que foi removido do bd.
+		s.setAttribute("login","false");
+		
 		//Identificando o pacote
 		ad.setAction(da.getAction());
 		ad.setUseCase(da.getUseCase());
