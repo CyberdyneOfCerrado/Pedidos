@@ -31,7 +31,7 @@ public class ManterAdmView extends ViewController {
 				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}else{
-				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"alerta.html");
+				 temp = super.startMiniTemplator(super.getSevletContext()+"staff"+super.getSeparador()+"erro.html");
 				 temp.setVariable("log",ad.getMessage());
 				 resul = temp.generateOutput();
 			}
