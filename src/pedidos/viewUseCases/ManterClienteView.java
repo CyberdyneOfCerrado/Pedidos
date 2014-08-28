@@ -48,13 +48,13 @@ public class ManterClienteView extends ViewController {
 				 temp = super.startMiniTemplator(super.getSevletContext()+ad.getUseCase()+super.getSeparador()+"row.html");
 				 ArrayList<Cliente> arl = (ArrayList<Cliente>) ad.getData("search");
 				 for(Cliente cliente : arl ){
-					 
+					 //procura a referência ${pk} e armazena o valor processado
 					 temp.setVariable("pk",cliente.getPk());
 					 temp.setVariable("idade",cliente.getIdade());
 					 temp.setVariable("sexo", cliente.getSexo());
 					 temp.setVariable("nome", cliente.getNome());
 					 
-					 temp.addBlock("table");
+					 temp.addBlock("table");//adiciona o bloco dinâmico no html quantas vezes houver um cliente
 				 }
 				 
 				 resul = temp.generateOutput();

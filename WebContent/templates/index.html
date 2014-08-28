@@ -3,14 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastrar Pedido</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <title>Gerenciador de Pedidos</title>
 
     <!-- Bootstrap -->
     <link href="templates/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="templates/bootstrap/css/style.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+   		.sfooter{
+   			text-align: center;
+   			font-family: serif;
+   		}
+   </style>
   </head>
   <body>
   	<!--Barra de navega��o e bot�es-->
@@ -72,7 +78,7 @@
 
             <!-- Single button -->
             <div class="col-md-1 col-md-offset-7">
-            <a href="q?useCase=manterAdm&action=sair&redirect=false" class="btn btn-default">Sair</a> 
+            <a href="q?useCase=manterAdm&action=sair&redirect=false" class="btn btn-danger">Sair</a> 
             </div>
 
           </div>
@@ -86,5 +92,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="templates/bootstrap/js/bootstrap.min.js"></script>
     <script src="templates/bootstrap/js/pedido.js"></script>
+    
+    <!--Rodapé-->
+    <footer class="sfooter">
+    	<span class = "glyphicon glyphicon-copyright-mark"> Copyright 2014-2014 by Magicians. All Rights Reserved.</span>    	
+    </footer>
+    <!--Rodapé * Fim-->
   </body>
 </html>

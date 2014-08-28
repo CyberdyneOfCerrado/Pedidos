@@ -26,7 +26,7 @@ public class UseCaseController {
 	
 	@SuppressWarnings("unchecked")
 	public ActionDone chooseUserCase(DoAction doAction){
-		//1: procurar o caso de uso na hashtable.;
+		//1: procurar o caso de uso na hashtable;
 		//2: procurar a ação no caso de uso;
 		//3: procurar o método que executará o doAction;
 		//4: invocar o método passando o doAction.
@@ -53,15 +53,15 @@ public class UseCaseController {
 			//A ação informada não existe.
 			return copy(doAction);
 		}
-		//Fim validado ações.
+		//Fim da validação das ações.
 		
 		//----Atuando com reflexão------
 		@SuppressWarnings("rawtypes")
-		Class classe = useCase.getClass();
+		Class classe = useCase.getClass();//convertendo o UC em tipo class
 		ActionDone actionDone = null;
 		try {
-			Method m   = classe.getMethod(doAction.getAction(),DoAction.class);
-			actionDone = (ActionDone) m.invoke(useCase,doAction);
+			Method m   = classe.getMethod(doAction.getAction(),DoAction.class);//nome do método e parâmetros do método
+			actionDone = (ActionDone) m.invoke(useCase,doAction);//casting p/ action done de um object (resultado do invoke)
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("Ocorreu um erro na ignição do método.");

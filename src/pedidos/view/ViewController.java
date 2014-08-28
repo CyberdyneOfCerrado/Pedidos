@@ -53,5 +53,6 @@ public abstract class ViewController {
 	
 	//Comportamento que deve ser abstraído para as classes filhas para garantir a interatividade com
 	//a classe ServletController
+	//escolhe a o cenário a ser executado para cada visão específica
 	public abstract String choose( ActionDone ad );
 }

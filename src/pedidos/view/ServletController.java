@@ -49,25 +49,26 @@ public class ServletController {
 	
 	//Processa os dados da Servlet.
 	public String process(HttpServletRequest request) throws TemplateSyntaxException, IOException{
-		DoAction   da = makeDoAction(request);
-		ActionDone ad=null;
+		DoAction   da = makeDoAction(request); //convertendo o Request em DoAction
+		ActionDone ad = null;
 		if(da.getAction()==null){
-			return init();
+			return init();//cria uma tela vazia
 		}else{
-		//Se ação ao informada for do tipo 'redirect' os dados não devem ser enviados
+		//Se ação informada for do tipo 'redirect=true' os dados não devem ser enviados p/ o UseCaseController
 			if( da.getData("redirect").equals("false")){
 				ad = ucc.chooseUserCase(da);
 				ad.setData("redirect","false");
 			}else{
-				ad = new ActionDone(da.getUseCase(),da.getAction(),da.getHashtable());
+				ad = new ActionDone(da.getUseCase(),da.getAction(),da.getHashtable());//copiando o DA p/ o AC
 			}
 		}
-		return readActionDone(ad);
+		return readActionDone(ad);//abre o pacote de ação concluída e o manda p/ classe especialista
 	};
 	
 	//Cria um pacote DoAction
 	private DoAction makeDoAction(HttpServletRequest request){
 		//1 pegando o nome do caso de uso e a respectiva ação.
+		//useCase e Action são atributos estáticos em qualquer formulário
 		String useCase = request.getParameter("useCase");
 		String action   = request.getParameter("action");
 		String security = (String) request.getAttribute("security");
@@ -76,19 +77,20 @@ public class ServletController {
 		//Casou houver alguma restrição de segurança
 		if(security.equals("true")){
 			da = new DoAction("security","acessBlock");
-			da.setData("redirect","true");
+			da.setData("redirect","true"); //informa se deve pegar o DA e processá-lo, falsa = processa, true = apenas redireciona
 			return da;
 		}
 				
 		da = new DoAction(useCase,action);
 		
-		//Pegando todos os parâmetros adicionados, exceto pelo userCase e action;
+		//Pegando todos os parâmetros adicionados, exceto pelo useCase e action;
 		Enumeration<String> valuesName = request.getParameterNames();
 		
 		while(valuesName.hasMoreElements()){
 			String temp = valuesName.nextElement();
 			if( !temp.equals("useCase") && !temp.equals("action")){
-				da.setData(temp,request.getParameter(temp));
+				da.setData(temp,request.getParameter(temp));//setando o nome do parametro como chave na hashtable
+															//setando o nome do parametro como valor
 			}
 		}
 		//Pegando dados de Sessão
@@ -99,7 +101,7 @@ public class ServletController {
 	
 	//Interpreta os dados do pacote ActionDone.
 	private String readActionDone(ActionDone ad){
-		//Condição trivial caso estes dois parâmetros sejam nulos. nulos vão para a tela de login.
+		
 		String conteudo = null;
 		//gerando o conteúdo.
 		 ViewController view = listViews.get(ad.getUseCase());

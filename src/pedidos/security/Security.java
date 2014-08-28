@@ -7,7 +7,7 @@ public class Security {
 	
 	public Security(){
 		acess = new Hashtable<>();
-		//Adicinar apenas as ações que será restritas a conta de Adm.
+		//Adicinar apenas as ações que são restritas a conta de Adm.
 		
 		String []manterAdm = {"excluir","alterar","cadastrar"};
 		String []manterCliente = {"excluir","listar"};
