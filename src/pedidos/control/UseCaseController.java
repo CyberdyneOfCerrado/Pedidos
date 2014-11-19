@@ -13,16 +13,8 @@ import pedidos.util.DoAction;
 
 //Esta classe procura pela classe de UseCase mais adequada para atuar na requisição
 public class UseCaseController {
-	Hashtable<String,ModelController> listUserCase;
-	
+
 	public UseCaseController(){
-		listUserCase = new Hashtable<>(); 
-		
-		//Casos de uso novos devem ser adicionados aqui.
-		 listUserCase.put("manterCliente", new ManterCliente());
-		 listUserCase.put("manterProduto", new ManterProduto());
-		 listUserCase.put("manterPedido", new ManterPedido());
-		 listUserCase.put("manterAdm", new ManterAdm());
 	};
 	
 	@SuppressWarnings("unchecked")
@@ -36,10 +28,10 @@ public class UseCaseController {
 		if(doAction.getUseCase() == null){
 			return copy(doAction);
 		}
+		
 		//MODIFICAÇÃO 1;
 		//Pegando o nome do pacote, que é estático para todos as classes de caso de uso; usando o método firstUpperCase
 		//para transformar a primeira letra em maiúsculas e o resto não é necessário implementar qualquer mudanças. 
-		
 		ModelController useCase = null;
 		try {
 			useCase = (ModelController) Class.forName("pedidos.useCases."+ Converter.firstUpperCase(doAction.getUseCase())).newInstance();
@@ -58,6 +50,7 @@ public class UseCaseController {
 
 		
 		//Validando existência da ação
+		
 		//MODIFICAÇÃO 2; 
 		//Não é mais necessário eu resgatar os nomes dos cenários dentro da classe de leilão, já que existe um padrão entre os dados 
 		//oriundos das telas e dos métodos codificados dentro das classes de caso de uso. Dessa maneira só é necessário resgatar o método
