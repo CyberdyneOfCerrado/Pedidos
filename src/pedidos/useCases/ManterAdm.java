@@ -9,7 +9,7 @@ import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 //Classe que mantem um Adm no sistema, seus métodos são cenários.
-public class ManterAdm extends ModelController {
+public class ManterAdm extends ModelController<Adm> {
 	private CrudAdm ca;
 	
 	public ManterAdm(){
@@ -135,8 +135,8 @@ public class ManterAdm extends ModelController {
 	}
 
 	@Override
-	public boolean validarCustom(Object o) {
-		// TODO Auto-generated method stub
+	public boolean validarCustom(Adm o) {
+		
 		return false;
 	}
 }

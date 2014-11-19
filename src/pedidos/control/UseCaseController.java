@@ -8,7 +8,7 @@ import pedidos.util.DoAction;
 
 //Esta classe procura pela classe de UseCase mais adequada para atuar na requisição
 public class UseCaseController {
-
+	
 	public UseCaseController(){
 	};
 	
