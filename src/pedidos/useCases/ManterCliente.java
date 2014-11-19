@@ -10,7 +10,7 @@ import pedidos.model.Pagamento;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
-public class ManterCliente extends ModelController {
+public class ManterCliente extends ModelController<Cliente> {
 	private CrudCliente cc;
 	private CrudPagamento cPag;
 	
@@ -122,22 +122,10 @@ public class ManterCliente extends ModelController {
 		if( nome.equals("") || idade.equals("") || sexo.equals("") )return false;
 		return true;
 	}
-	
-	@Override
-	public String[] getActions() {
-		String [] temp ={
-							"cadastrar",
-							"alterar",
-							"excluir",
-							"consultar",
-							"categoria",
-							"listar"
-						};
-		return temp;
-	};
 
 	@Override
-	public String getUserCase() {
-		return "manterCliente";
-	};
+	public boolean validarCustom(Cliente o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

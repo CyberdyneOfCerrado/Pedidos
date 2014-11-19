@@ -7,7 +7,7 @@ import pedidos.model.Produto;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
-public class ManterProduto extends ModelController {
+public class ManterProduto extends ModelController<Produto> {
 	private CrudProduto cp;
 	
 	public ManterProduto(){
@@ -74,26 +74,16 @@ public class ManterProduto extends ModelController {
 		return ad;
 	};
 	
-	@Override
-	public String[] getActions() {
-		String[] actions ={
-							"cadastrar",
-							"alterar",
-							"excluir",
-							"consultar"
-						  };
-		return actions;
-	};
-
-	@Override
-	public String getUserCase() {
-		return "manterProduto";
-	};
-	
 	private boolean validarCampos( DoAction da ){
 		String nome  = (String) da.getData("nome");
 		String preco = (String) da.getData("preco");
 		if( nome.equals("") || preco.equals("")) return false;
 		return true;
+	}
+
+	@Override
+	public boolean validarCustom(Produto o) {
+		// TODO Auto-generated method stub
+		return false;
 	};
 }

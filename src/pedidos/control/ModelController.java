@@ -1,5 +1,16 @@
 package pedidos.control;
-public abstract class ModelController {
-	public abstract String[] getActions();//Os métodos que existem nesta classe
-	public abstract String   getUserCase();//O nome do caso de uso que esta classe implementa.
+
+import pedidos.util.ReflectiveModel;
+
+public abstract class ModelController<T> {
+	public abstract boolean validarCustom(T o); 
+	
+	public boolean validar( T o ){
+		boolean temp =  this.validarCustom( o ); 
+		
+		if( ( o instanceof ReflectiveModel  ) && temp )
+			return true;
+		
+		return false; 
+	}; 
 }

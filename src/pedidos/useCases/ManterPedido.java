@@ -11,7 +11,7 @@ import pedidos.model.Pagamento;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 
-public class ManterPedido extends ModelController {
+public class ManterPedido extends ModelController<Object> {
 	private CrudPedido cp;
 	private CrudProduto cpp;
 	private CrudPagamento cPag;
@@ -113,22 +113,11 @@ public class ManterPedido extends ModelController {
 		ad.setProcessed(true);
 		return ad;
 	}
-	@Override
-	public String[] getActions() {
-		String[] actions ={
-							"listar",
-							"cadastrar",
-							"pedido",
-							"excluir",
-							"alterar",
-							"removeProduto",
-							"updatePagamento"
-						  };
-		return actions;
-	};
 
 	@Override
-	public String getUserCase() {
-		return "manterPedido";
-	};
+	public boolean validarCustom(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

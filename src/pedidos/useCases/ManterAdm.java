@@ -124,24 +124,6 @@ public class ManterAdm extends ModelController {
 		ad.setProcessed(true);
 		return ad;
 	};
-	
-	@Override
-	public String[] getActions() {
-		String[] a ={
-						"login",
-						"sair",
-						"alterar",
-						"excluir",
-						"cadastrar",
-						"consultar"
-					};
-		return a;
-	}
-
-	@Override
-	public String getUserCase() {
-		return "manterAdm";
-	}
 
 	public boolean validarCampos( DoAction da ){
 		String email = (String) da.getData("email");
@@ -150,5 +132,11 @@ public class ManterAdm extends ModelController {
 		if( email.equals("") || senha.equals("") || senhaConfir.equals(""))return false;
 		if( !senha.equals(senhaConfir))return false;
 		return true;
+	}
+
+	@Override
+	public boolean validarCustom(Object o) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
