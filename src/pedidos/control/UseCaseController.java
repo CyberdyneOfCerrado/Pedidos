@@ -1,12 +1,7 @@
 package pedidos.control;
 
 import java.lang.reflect.Method;
-import java.util.Hashtable;
 
-import pedidos.useCases.ManterAdm;
-import pedidos.useCases.ManterCliente;
-import pedidos.useCases.ManterPedido;
-import pedidos.useCases.ManterProduto;
 import pedidos.util.ActionDone;
 import pedidos.util.Converter;
 import pedidos.util.DoAction;
