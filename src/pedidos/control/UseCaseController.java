@@ -8,6 +8,7 @@ import pedidos.useCases.ManterCliente;
 import pedidos.useCases.ManterPedido;
 import pedidos.useCases.ManterProduto;
 import pedidos.util.ActionDone;
+import pedidos.util.Converter;
 import pedidos.util.DoAction;
 
 //Esta classe procura pela classe de UseCase mais adequada para atuar na requisição
@@ -35,21 +36,41 @@ public class UseCaseController {
 		if(doAction.getUseCase() == null){
 			return copy(doAction);
 		}
-		ModelController useCase = listUserCase.get(doAction.getUseCase());
+		//MODIFICAÇÃO 1;
+		//Pegando o nome do pacote, que é estático para todos as classes de caso de uso; usando o método firstUpperCase
+		//para transformar a primeira letra em maiúsculas e o resto não é necessário implementar qualquer mudanças. 
+		
+		ModelController useCase = null;
+		try {
+			useCase = (ModelController) Class.forName("pedidos.useCases."+ Converter.firstUpperCase(doAction.getUseCase())).newInstance();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} 
 		
 		//Validando existência do caso de uso.
 		if( useCase == null ){
 			//Gerar um actionDone
 			return copy(doAction);
 		}
-		//Fim validando caso de uso.
 		
-		String[] actions = useCase.getActions();
+		//Fim validando caso de uso.
+
 		
 		//Validando existência da ação
-		boolean temp = false;
-		for(String a : actions)if( a.equals(doAction.getAction())) temp = true;
-		if( !temp ){
+		//MODIFICAÇÃO 2; 
+		//Não é mais necessário eu resgatar os nomes dos cenários dentro da classe de leilão, já que existe um padrão entre os dados 
+		//oriundos das telas e dos métodos codificados dentro das classes de caso de uso. Dessa maneira só é necessário resgatar o método
+		//apartir do nome. Linha 61.
+		Method m = null;
+		Class classe = useCase.getClass(); 
+		try {
+			m = classe.getDeclaredMethod(doAction.getAction(),DoAction.class);
+		} catch (NoSuchMethodException | SecurityException e1) {
+			throw new RuntimeException("Error ao tentar pegar uma um método dentro de uma classe, UseCaseController", e1); 
+		} 
+		
+		if( m == null ){
 			//A ação informada não existe.
 			return copy(doAction);
 		}
@@ -57,10 +78,9 @@ public class UseCaseController {
 		
 		//----Atuando com reflexão------
 		@SuppressWarnings("rawtypes")
-		Class classe = useCase.getClass();//convertendo o UC em tipo class
+		
 		ActionDone actionDone = null;
 		try {
-			Method m   = classe.getMethod(doAction.getAction(),DoAction.class);//nome do método e parâmetros do método
 			actionDone = (ActionDone) m.invoke(useCase,doAction);//casting p/ action done de um object (resultado do invoke)
 		} catch (Exception e) {
 			e.printStackTrace();

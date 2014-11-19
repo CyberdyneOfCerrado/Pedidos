@@ -1,6 +1,7 @@
 package pedidos.util;
 
 public class Converter {
+	
  public Object convert ( Object temp, String type ){
 	 Object o = null;
 	 type =  type.substring(type.lastIndexOf(".")+1);
@@ -17,5 +18,11 @@ public class Converter {
 	 }
 	 return o;
  };
+ 
+ public static String firstUpperCase(String value){
+	 String temp = value.substring(0,1);
+	 value = temp.toUpperCase() + value.substring(1,value.length());
+	 return value; 
+ }
  
 }
