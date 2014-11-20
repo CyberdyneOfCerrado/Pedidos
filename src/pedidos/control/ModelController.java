@@ -11,6 +11,6 @@ public abstract class ModelController<T> {
 		if( ( o instanceof ReflectiveModel  ) && temp )
 			return true;
 		
-		return false; 
+		return false;
 	}; 
 }

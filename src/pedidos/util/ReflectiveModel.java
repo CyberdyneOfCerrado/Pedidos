@@ -32,23 +32,25 @@ public class ReflectiveModel {
 	};
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
+	//Pega o atributo de uma classe de forma reflexiva
 	protected <T>String getColumnValues(T classe ){
 		Converter con = new Converter();
 		Class<? extends Class> c = (Class<? extends Class>) classe.getClass();
-		String[] variables = getColumnName(classe).split(","); 
+		String[] variables = getColumnName(classe).split(","); //Pega o nome dos atributos
 		Method[] m = c.getDeclaredMethods();
 		String result="";
 		
 		for( int a = 0 ; a < variables.length ; a++ ){
-			String temp = "get"+variables[a];
+			String temp = "get"+variables[a];//Junta o get + o nome do atributo
 			for( int b = 0 ; b < m.length ; b++ ){
-				if(temp.equalsIgnoreCase(m[b].getName())){
-					Type t = m[b].getGenericReturnType();
+				if(temp.equalsIgnoreCase(m[b].getName())){//compara sem canse sensitive
+					Type t = m[b].getGenericReturnType();//Tipo de retorno do método
 					try {
 						 
-						 if(!m[b].getName().contains("pk")){
-							 Object concat = m[b].invoke(classe, null);
+						 if(!m[b].getName().contains("pk")){ //Se o nome do método tiver 'pk', não é preciso pegar (pk serial)
+							 Object concat = m[b].invoke(classe, null);//valor do retorno do método (saída encapsulada no objeto)
 							 concat = (concat == null)? " ":concat.toString();
+							 //comparação entre números e strings para o sql do bd
 							 if( t == Integer.TYPE){
 								 result += ","+concat;
 							 }else{
@@ -65,7 +67,7 @@ public class ReflectiveModel {
 		return result.substring(1,result.length());
 	};
 	
-	//inicia um Objeto a partir dos dados de uma doAction :|__|-+--[
+	//cria/inicia um Objeto a partir dos dados de um doAction
 	protected <T>void buildObject(T classe,DoAction doAction){
 		Set keys = doAction.getHashtable().keySet();
 		Converter con = new Converter();

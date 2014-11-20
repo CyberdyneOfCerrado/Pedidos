@@ -36,6 +36,7 @@ public class CrudAdm extends CrudController {
 	};
 	
 	public ActionDone save   ( Adm a){
+		//Métodos de ReflectiveModel
 		String table = a.getTableName();
 		String columns = a.getColumnName();
 		String values = a.getColumnValues();
@@ -83,12 +84,11 @@ public class CrudAdm extends CrudController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		}finally{ //Bloco executado de qualquer forma
 			if(result != null)
 				try {
-					result.close();
+					result.close(); //ResultSet fechado
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}

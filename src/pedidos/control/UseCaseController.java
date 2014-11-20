@@ -49,7 +49,7 @@ public class UseCaseController {
 		//MODIFICAÇÃO 2; 
 		//Não é mais necessário eu resgatar os nomes dos cenários dentro da classe de leilão, já que existe um padrão entre os dados 
 		//oriundos das telas e dos métodos codificados dentro das classes de caso de uso. Dessa maneira só é necessário resgatar o método
-		//apartir do nome. Linha 61.
+		//apartir do nome. 
 		Method m = null;
 		Class classe = useCase.getClass(); 
 		try {
@@ -69,6 +69,7 @@ public class UseCaseController {
 		
 		ActionDone actionDone = null;
 		try {
+			//Parâmetros: classe instanciada que contém o método que queremos invocar e o parâmetro do método
 			actionDone = (ActionDone) m.invoke(useCase,doAction);//casting p/ action done de um object (resultado do invoke)
 		} catch (Exception e) {
 			e.printStackTrace();
