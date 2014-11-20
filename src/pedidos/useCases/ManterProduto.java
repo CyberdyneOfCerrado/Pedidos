@@ -18,7 +18,7 @@ public class ManterProduto extends ModelController<Produto> {
 		Produto p = new Produto();
 		p.biuldObject(da);
 		ActionDone ad = new ActionDone();
-		if(validarCampos(da)){
+		if(validar(p)){
 			ad = cp.save(p);
 			ad.setMessage("Cadastrado com sucesso.");
 			ad.setStatus(true);
@@ -47,7 +47,7 @@ public class ManterProduto extends ModelController<Produto> {
 		p.biuldObject(da);
 		
 		ActionDone ad = new ActionDone();
-		if(validarCampos(da)){
+		if(validar(p)){
 			ad = cp.update(p);
 			ad.setMessage("Dados alterados com sucesso.");
 			ad.setStatus(true);
@@ -74,16 +74,9 @@ public class ManterProduto extends ModelController<Produto> {
 		return ad;
 	};
 	
-	private boolean validarCampos( DoAction da ){
-		String nome  = (String) da.getData("nome");
-		String preco = (String) da.getData("preco");
-		if( nome.equals("") || preco.equals("")) return false;
-		return true;
-	}
-
 	@Override
 	public boolean validarCustom(Produto o) {
-		// TODO Auto-generated method stub
-		return false;
+		if( o.getNome().equals("") || o.getPreco() <= 0 || o.getPreco() > 100000 || o.getNome().length() > 45) return false;
+		return true;
 	};
 }

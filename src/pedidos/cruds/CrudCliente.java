@@ -100,6 +100,14 @@ public class CrudCliente extends CrudController{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		ad.setData("search",arl);
 		return ad;
@@ -120,6 +128,14 @@ public class CrudCliente extends CrudController{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		ad.setData("todos",arl);
 		return ad;
@@ -137,6 +153,14 @@ public class CrudCliente extends CrudController{
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		ad.setData("todos",arl);
 		return ad;

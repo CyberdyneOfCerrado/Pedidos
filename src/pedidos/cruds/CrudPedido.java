@@ -42,7 +42,16 @@ public class CrudPedido extends CrudController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
+		
 		ad.setData("todos",arl);
 		return ad;
 	};
@@ -62,6 +71,14 @@ public class CrudPedido extends CrudController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		ad.setData("todos",arl);
 		return ad;
@@ -75,10 +92,16 @@ public class CrudPedido extends CrudController {
 		ResultSet result = super.runWithResult("select pk from pedido where pk = (select max(pk) from pedido )");
 		try {
 			while( result.next()) return result.getString(1);
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		return "";		
 	};
@@ -108,6 +131,14 @@ public class CrudPedido extends CrudController {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		int temp = Integer.parseInt((String) da.getData("preco"));
@@ -142,6 +173,14 @@ public class CrudPedido extends CrudController {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		return new ActionDone();
 	}
@@ -169,6 +208,14 @@ public class CrudPedido extends CrudController {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			if(result != null)
+				try {
+					result.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		valor = Integer.parseInt(key);
 		int temp = Integer.parseInt((String) da.getData("preco"));

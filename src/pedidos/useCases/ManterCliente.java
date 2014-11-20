@@ -24,7 +24,7 @@ public class ManterCliente extends ModelController<Cliente> {
 		c.biuldObject(da);
 		ActionDone ad = new ActionDone();
 		
-		if(validarCampos(da)){
+		if(validar(c)){
 			ad = cc.save(c);
 			ad.setMessage("Cadastrado com sucesso.");
 			ad.setStatus(true);
@@ -90,7 +90,7 @@ public class ManterCliente extends ModelController<Cliente> {
 		Cliente c = new Cliente();
 		c.biuldObject(da);
 		ActionDone ad = new ActionDone();
-		if(validarCampos(da)){
+		if(validar(c)){
 			ad = cc.update(c);
 			ad.setMessage("Dados alterados com sucesso.");
 			ad.setStatus(true);
@@ -114,18 +114,11 @@ public class ManterCliente extends ModelController<Cliente> {
 		ad.setProcessed(true);
 		return ad;
 	};
-	
-	private boolean validarCampos( DoAction da ){
-		String nome = (String) da.getData("nome");
-		String idade = (String) da.getData("idade");
-		String sexo = (String) da.getData("sexo");
-		if( nome.equals("") || idade.equals("") || sexo.equals("") )return false;
-		return true;
-	}
 
 	@Override
 	public boolean validarCustom(Cliente o) {
-		// TODO Auto-generated method stub
-		return false;
+		if( o.getNome().equals("") || o.getIdade() < 0 || o.getSexo().equals("") ||
+		    o.getNome().length() >= 40 || o.getSexo().length() > 1)return false;
+		return true;
 	}
 }

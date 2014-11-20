@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import pedidos.control.ModelController;
 import pedidos.cruds.CrudAdm;
 import pedidos.model.Adm;
-import pedidos.model.Cliente;
 import pedidos.util.ActionDone;
 import pedidos.util.DoAction;
 //Classe que mantem um Adm no sistema, seus métodos são cenários.
@@ -21,8 +20,9 @@ public class ManterAdm extends ModelController<Adm> {
 		Adm a = new Adm();
 		a.biuldObject(da);
 		ActionDone ad = new ActionDone();
+		String senhaConfir = (String) da.getData("senhaConfir");
 		
-		if(validarCampos(da)){
+		if(validar(a) && a.getSenha().equals(senhaConfir)){
 			ad = ca.save(a);
 			ad.setMessage("Cadastrado com sucesso.");
 			ad.setStatus(true);
@@ -68,8 +68,9 @@ public class ManterAdm extends ModelController<Adm> {
 		Adm a = new Adm();
 		a.biuldObject(da);
 		ActionDone ad = new ActionDone();
+		String senhaConfir = (String) da.getData("senhaConfir");
 		
-		if(validarCampos(da)){
+		if(validar(a) && a.getSenha().equals(senhaConfir)){
 			ad = ca.update(a);
 			ad.setMessage("Dados alterados com sucesso.");
 			ad.setStatus(true);
@@ -125,18 +126,10 @@ public class ManterAdm extends ModelController<Adm> {
 		return ad;
 	};
 
-	public boolean validarCampos( DoAction da ){
-		String email = (String) da.getData("email");
-		String senha = (String) da.getData("senha");
-		String senhaConfir = (String) da.getData("senhaConfir");
-		if( email.equals("") || senha.equals("") || senhaConfir.equals(""))return false;
-		if( !senha.equals(senhaConfir))return false;
-		return true;
-	}
-
 	@Override
 	public boolean validarCustom(Adm o) {
-		
-		return false;
+		if( o.getEmail().equals("") || o.getSenha().equals("") || o.getSenha().equals("") ||
+			o.getSenha().length() >=16 || o.getEmail().length() >= 45) return false;
+		return true;
 	}
 }
